@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -10,6 +11,12 @@ use Illuminate\Validation\ValidationException;
 class UserAuth extends Controller
 {
 
+
+    public function profile(){
+        $products = Product::all();
+
+        return view('auth.profile',compact('products'));
+    }
     public function showRegister(){
         return view('auth.register');
     }
@@ -50,13 +57,19 @@ class UserAuth extends Controller
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
+        if(Auth::user()){
 
-        // $user = Auth::user();
+            $user = Auth::user();
 
-        // $token = $user->createToken('auth_token')->plainTextToken;
-        $token = Auth::user()->createToken('auth_token')->plainTextToken;
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return redirect()->route('home');
+        }
+
+        // $token = Auth::user()->createToken('auth_token')->plainTextToken;
         // return response()->json(['token' => $token], 200);
-        return redirect()->route('home');
+
+
+        // return response()->json(['token' => $token], 200);
     }
 
     public function logout(Request $request)

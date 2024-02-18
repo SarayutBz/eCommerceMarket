@@ -37,7 +37,13 @@
                 <i class="fas fa-search search-icon"></i>
             </div>
             <div class="user-bag">
-                <a  href="{{route('login.l')}}">  <i class="text-white fa-regular fa-circle-user"></i></a>
+                @auth
+                <!-- ถ้าล็อกอินอยู่, ให้เปลี่ยนลิงก์ไปยัง 'profile' -->
+                <a href="{{ route('profile') }}"><i class="text-white fa-regular fa-circle-user"></i></a>
+            @else
+                <!-- ถ้ายังไม่ล็อกอิน, ให้เปลี่ยนลิงก์ไปยัง 'login.l' -->
+                <a href="{{ route('login.l') }}"><i class="text-white fa-regular fa-circle-user"></i></a>
+            @endauth
                 <i class="text-white fa-solid fa-cart-shopping" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                 aria-controls="offcanvasRight"></i>
             </div>

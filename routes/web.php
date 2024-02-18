@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/home', function () {
-    return view('homepage');
+
+    $products = Product::all();
+    return view('homepage',compact('products'));
 })->name('home');
 
 // หน้า แรก เว็บ welcome
@@ -31,3 +34,7 @@ Route::post('/login', [UserAuth::class, 'login'])->name('login');
 
 // logout
 Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
+
+//profile
+Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
+

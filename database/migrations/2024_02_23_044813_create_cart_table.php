@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('cartID');
             $table->unsignedBigInteger('productID');
             $table->foreign('productID')->references('productID')->on('products');
-            $table->unsignedBigInteger('custommerID');
-            $table->foreign('custommerID')->references('id')->on('users');
+            $table->unsignedBigInteger('userID');
+            $table->foreign('userID')->references('userID')->on('users');
             $table->integer('quantity');
             $table->integer('price');
         });

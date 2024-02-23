@@ -29,72 +29,36 @@
     </div>
 
 
-
-    <div class="Recommended-Products">
+    <div class="Recommended-Products container">
         <h3 class="">Recommended Products</h3>
-
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="row">
             @foreach ($products as $product)
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ $product->imageurl }}" class="card-img-top" alt="{{ $product->name }}" width="150px">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ $product->imageurl }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-title fw-bold">{{ $product->name }}</p>
                             <p class="card-text">{{ $product->description }}</p>
+                            <div class="price d-flex ">
+                                <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                    aria-controls="offcanvasRight">
+                                    <i class="text-white fa-solid fa-cart-plus"></i>
+                                </a>
+                                <div class="text">
+                                    <p class="m-2 fs-5">{{ $product->price }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+    </div>
 
 
 
 
 
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasRightLabel">Your Shopping bag</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <hr>
-            <div class="offcanvas-body">
-                <form method="post" action="">
-                    @csrf
-                    <div class="box d-flex">
 
-                        <div class="card mb-3" style="max-width: 540px; ">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="https://i.pinimg.com/564x/cf/ef/2d/cfef2d1cd8760954aaba68056e8061cd.jpg"
-                                        class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural
-                                            lead-in to additional content. This content is a little bit longer.</p>
-
-
-
-                                        <div class="number-add-remove  d-flex">
-                                            <button class="quantity-btn btn btn-dark" type="button">-</button>
-                                            <input type="number" name="quantity" />
-                                            <button class="quantity-btn btn btn-dark" type="button">+</button>
-                                        </div>
-
-                                        <p class="card-text"><small class="text-body-secondary">Price : $1200</small></p>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger">Submit</button>
-
-                </form>
             </div>
         @endsection

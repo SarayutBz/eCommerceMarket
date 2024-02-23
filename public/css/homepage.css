@@ -219,9 +219,9 @@
 
         }
 
-        .card .row {
+        .card {
             border-radius: 10px;
-            /* border: 0.5px solid black; */
+            /* border: 0.2px solid black; */
             box-shadow: 4px 7px 8px rgba(0, 0, 0, 0.1);
             /* ตั้งค่าเงา */
         }
@@ -234,3 +234,4 @@
         i:hover{
             cursor: pointer;
         }
+

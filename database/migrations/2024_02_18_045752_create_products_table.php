@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('imageurl');
             $table->unsignedBigInteger('categoryID');
             $table->foreign('categoryID')->references('categoryID')->on('categories');
+            $table->timestamps();
         });
     }
 

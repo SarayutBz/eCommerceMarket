@@ -3,6 +3,8 @@
 use App\Models\Product;
 use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +16,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/home', function () {
-
-    $products = Product::all();
-    return view('homepage',compact('products'));
-})->name('home');
+Route::get('/home', [ProductController::class, 'index'])->name('home');
 
 // หน้า แรก เว็บ welcome
 
@@ -37,4 +34,8 @@ Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
 
 //profile
 Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
+
+Route::resource('products', ProductController::class);
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 

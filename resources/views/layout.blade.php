@@ -32,10 +32,12 @@
 
 
         <form class="d-flex form-input" role="search">
+            <form action="{{route('home')}}" method="get">
             <div class="search-container">
-                <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search">
+                <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search" name="search">
                 <i class="fas fa-search search-icon"></i>
             </div>
+            </form>
             <div class="user-bag">
                 @auth
                 <!-- ถ้าล็อกอินอยู่, ให้เปลี่ยนลิงก์ไปยัง 'profile' -->

@@ -11,6 +11,14 @@
 <body>
 
     <h3>Hello {{Auth::user()->name}}</h3>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        {{-- <label for="imageUpload">เลือกรูปภาพ:</label> --}}
+        <input type="file" id="imageUpload" name="image" accept="image/*">
+        <input type="submit" value="อัปโหลด">
+    </form>
+
+
     <form action="{{route('logout')}}" method="POST">
         @csrf
         <button type="submit">logout</button>

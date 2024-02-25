@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('userID')->references('userID')->on('users');
             $table->integer('quantity');
             $table->integer('price');
+            $table->timestamps();
         });
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Models\Product;
 use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,7 @@ Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
 
 //profile
 Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
+
+Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 

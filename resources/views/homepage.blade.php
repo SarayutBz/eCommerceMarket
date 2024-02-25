@@ -39,15 +39,32 @@
                         <div class="card-body">
                             <p class="card-title fw-bold">{{ $product->name }}</p>
                             <p class="card-text">{{ $product->description }}</p>
+
                             <div class="price d-flex ">
-                                <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                    aria-controls="offcanvasRight">
-                                    <i class="text-white fa-solid fa-cart-plus"></i>
-                                </a>
+
+                                <form method="POST" action="{{ route('addCart') }}">
+                                    @csrf <!-- เพิ่ม CSRF token เพื่อความปลอดภัย -->
+                                    <input type="hidden" name="userID" value="{{ auth()->id() }}">
+                                    <input type="hidden" name="productID" value="{{ $product->productID }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <!-- ตั้งค่าปริยายให้เป็น 1 หรือตามต้องการ -->
+                                    <input type="hidden" name="price" value="{{ $product->price }}">
+                                    <!-- ตั้งค่าปริยายให้เป็น 1 หรือตามต้องการ -->
+                                    @auth
+                                        <button type="submit" class="submit">
+                                            <i class="text-white fa-solid fa-cart-plus"></i>
+                                        </button>
+                                    @else
+                                        <p>กรุณาเข้าสู่ระบบก่อนที่จะเพิ่มรายการในตะกร้า</p>
+                                    @endauth
+                                </form>
+
                                 <div class="text">
                                     <p class="m-2 fs-5">{{ $product->price }}</p>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -60,5 +77,5 @@
 
 
 
-            </div>
-        @endsection
+    </div>
+@endsection

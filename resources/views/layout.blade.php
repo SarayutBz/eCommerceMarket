@@ -23,11 +23,12 @@
 
     <div class="menu-bar bg-dark">
         <div class="image">
-            <img src="{{ asset('icon.png') }}">
+            <a href="{{route('home')}}"><img src="{{ asset('icon.png') }}"></a>
+
         </div>
         <div class="bbep-text">
+            <a href="{{route('home')}}"><h3 class="text-white  text-center fs-1">BBEP</h3></a>
 
-            <h3 class="text-white  text-center fs-1">BBEP</h3>
         </div>
 
 
@@ -39,13 +40,19 @@
             <div class="user-bag">
                 @auth
                 <!-- ถ้าล็อกอินอยู่, ให้เปลี่ยนลิงก์ไปยัง 'profile' -->
-                <a href="{{ route('profile') }}"><i class="text-white fa-regular fa-circle-user"></i></a>
+                <a href="{{ route('profile') }}"><img src="" alt="" srcset=""></a>
+                <a href="{{route('cart')}}">
+                    <i class="text-white fa-solid fa-cart-shopping" ></i>
+                </a>
             @else
                 <!-- ถ้ายังไม่ล็อกอิน, ให้เปลี่ยนลิงก์ไปยัง 'login.l' -->
                 <a href="{{ route('login.l') }}"><i class="text-white fa-regular fa-circle-user"></i></a>
+                <a href="{{route('login.l')}}">
+                    <i class="text-white fa-solid fa-cart-shopping" ></i>
+                </a>
             @endauth
-                <i class="text-white fa-solid fa-cart-shopping" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                aria-controls="offcanvasRight"></i>
+
+
             </div>
         </form>
     </div>

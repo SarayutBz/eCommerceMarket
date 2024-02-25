@@ -234,4 +234,9 @@
         i:hover{
             cursor: pointer;
         }
-
+        .price button{
+            border: none;
+            background-color: none;
+           border-radius: 80%;
+           padding: 0;
+        }

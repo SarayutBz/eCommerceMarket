@@ -2,15 +2,13 @@
 
 use App\Models\Image;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
-// use Illuminate\Support\Facades\Route;
-
-
 
 /*
 |--------------------------------------------------------------------------

@@ -21,7 +21,7 @@
     </div>
 
 
-    <form method="POST" action="{{route('home')}}"  class="d-flex form-input mt-1" role="search">
+    <form method="get" action="{{route('home')}}"  class="d-flex form-input mt-1" role="search">
         <div class="search-container">
             <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search">
             <i class="fas fa-search search-icon"></i>

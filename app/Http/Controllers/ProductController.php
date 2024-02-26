@@ -12,13 +12,13 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request);
-        $search = $request->search;
-        if($search != ''){
-            $products = Product::where('name','like','%'.$search.'%')->Orwhere('price','like',$search)->get();
-        }else{
-            $products = Product::all();
-        }
+        // dd($request);
+        // $search = $request->search;
+        // if($search != ''){
+        //     $products = Product::where('name','like','%'.$search.'%')->Orwhere('price','like',$search)->get();
+        // }else{
+        //     $products = Product::all();
+        // }
 
         // return view('homepage', compact('products'));
     }

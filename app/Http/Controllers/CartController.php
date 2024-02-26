@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,15 +34,23 @@ class CartController extends Controller
     }
 
     public function cart(){
+        $userID = Auth()->user()->getAttributes()['userID'];
+
         $carts = Cart::join('products', 'cart.productID', '=', 'products.productID')
-        ->whereIn('cart.productID', Product::pluck('productID'))
-        ->select('cart.*', 'products.*') // You can select specific columns from both tables
-        ->get();
+            ->whereIn('cart.productID', Product::pluck('productID'))
+            ->where('cart.userID', $userID) // Filter by userID
+            ->select('cart.*', 'products.*')
+            ->get();
+
+        $userId = Auth()->user()->getAttributes()['userID'];
+        $images = Image::where('userID', $userId)->get();
+
+
 
     // return response()->json(['data' => $carts]);
 
 
-    return view('cart.cart', compact('carts'));
+    return view('cart.cart', compact('carts','images'));
 
     }
 }

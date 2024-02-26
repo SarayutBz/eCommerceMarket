@@ -1,9 +1,16 @@
 <?php
 
-use App\Http\Controllers\CartController;
+use App\Models\Image;
 use App\Models\Product;
 use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProductController;
+// use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +23,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
+Route::get('/home', function (Request $request) {
 
-    $products = Product::all();
-    return view('homepage',compact('products'));
+    // $products = Product::all();
+    $search = $request->search;
+    if($search != ''){
+        $products = Product::where('name','like','%'.$search.'%')->Orwhere('price','like',$search)->get();
+    }else{
+        $products = Product::all();
+    }
+
+
+    if (\Illuminate\Support\Facades\Auth::check()) {
+    $userId = Auth()->user()->getAttributes()['userID'];
+    $images = Image::where('userID', $userId)->get();
+    }
+    else{
+        return view('homepage',compact('products'));
+    }
+    return view('homepage',compact('products','images'));
 })->name('home');
 
 // หน้า แรก เว็บ welcome
@@ -42,3 +64,13 @@ Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
 Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 
+
+
+Route::get('/', [ImageController::class, 'index']);
+Route::post('/upload', [ImageController::class, 'upload'])->name('upload');
+
+Route::post('/updatename', [UserAuth::class, 'updatename'])->name('updatename');
+
+
+Route::resource('products', ProductController::class);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');

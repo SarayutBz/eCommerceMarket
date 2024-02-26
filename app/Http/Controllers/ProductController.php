@@ -10,9 +10,17 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        dd($request);
+        $search = $request->search;
+        if($search != ''){
+            $products = Product::where('name','like','%'.$search.'%')->Orwhere('price','like',$search)->get();
+        }else{
+            $products = Product::all();
+        }
+
+        // return view('homepage', compact('products'));
     }
 
     /**

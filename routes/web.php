@@ -4,6 +4,8 @@ use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserAuth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
@@ -23,23 +25,28 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/home', function (Request $request) {
 
-    // $products = Product::all();
-    $search = $request->search;
-    if($search != ''){
-        $products = Product::where('name','like','%'.$search.'%')->Orwhere('price','like',$search)->get();
-    }else{
-        $products = Product::all();
-    }
+// $products = Product::all();
+$search = $request->search;
+if ($search != '') {
+    $products = Product::where('name', 'like', '%' . $search . '%')->orWhere('price', 'like', $search)->get();
+} else {
+    $products = Product::all();
+}
 
+$images = []; // Initialize the $images array
 
-    if (\Illuminate\Support\Facades\Auth::check()) {
+if (Auth::check()) {
+    // User is logged in
     $userId = Auth()->user()->getAttributes()['userID'];
     $images = Image::where('userID', $userId)->get();
-    }
-    else{
-        return view('homepage',compact('products'));
-    }
-    return view('homepage',compact('products','images'));
+    // return response()->json(['data'=>$images]);
+    return view('homepage', compact('products', 'images'));
+}
+return view('homepage', compact('products', 'images'));
+
+
+    // dd($images);
+    // return response()->json(['data'=>$images]);
 })->name('home');
 
 // หน้า แรก เว็บ welcome
@@ -67,8 +74,13 @@ Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/', [ImageController::class, 'index']);
 Route::post('/upload', [ImageController::class, 'upload'])->name('upload');
 
-Route::post('/updatename', [UserAuth::class, 'updatename'])->name('updatename');
 
 
 Route::resource('products', ProductController::class);
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+Route::delete('/delete',[CartController::class,'delete'])->name('delete-cart');
+
+Route::post('/updatename', [UserAuth::class, 'update'])->name('update');
+Route::delete('/deleteAccount', [UserAuth::class, 'deleteAccount'])->name('deleteAccount');
+

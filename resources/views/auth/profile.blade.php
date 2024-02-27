@@ -21,20 +21,27 @@
     </div>
 
 
-    <form method="get" action="{{route('home')}}"  class="d-flex form-input mt-1" role="search">
+    <form method="get" action="{{ route('home') }}" class="d-flex form-input mt-1" role="search">
         <div class="search-container">
             <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search">
             <i class="fas fa-search search-icon"></i>
         </div>
         <div class="user-bag">
+
             @auth
-                @foreach ($images as $image)
-                    <!-- ถ้าล็อกอินอยู่, ให้เปลี่ยนลิงก์ไปยัง 'profile' -->
+                @if ($images->isNotEmpty())
+                    @foreach ($images as $image)
+                        <a href="{{ route('profile') }}">
+                            <img src="{{ asset('storage/images/' . $image->filename) }}" alt="">
+                        </a>
+                    @endforeach
+                @else
                     <a href="{{ route('profile') }}">
-                        <img src="{{ asset('storage/images/' . $image->filename) }}" alt="">
-                        {{-- <img src="{{ asset('storage/images/' . $images->filename) }}" alt=""> --}}
+                        <img src="https://i.pinimg.com/564x/98/49/c6/9849c6bf0f1338a3ea9b2eca412c9791.jpg" alt="">
                     </a>
-                @endforeach
+                @endif
+
+
                 <a href="{{ route('cart') }}">
                     <i class="text-white fa-solid fa-cart-shopping"></i>
                 </a>
@@ -45,7 +52,6 @@
                     <i class="text-white fa-solid fa-cart-shopping"></i>
                 </a>
             @endauth
-
 
         </div>
     </form>
@@ -77,27 +83,51 @@
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-4">
-                @foreach ($images as $image)
-                    <img class="img-fluid rounded-start" src="{{ asset('storage/images/' . $image->filename) }}"
-                        alt="Image">
-                @endforeach
+                @if ($images->isNotEmpty())
+                        @foreach ($images as $image)
+                            <a href="{{ route('profile') }}">
+                                <img src="{{ asset('storage/images/' . $image->filename) }}" alt="">
+                            </a>
+                        @endforeach
+                    @else
+                        <a href="{{ route('profile') }}">
+                            <img src="https://i.pinimg.com/564x/98/49/c6/9849c6bf0f1338a3ea9b2eca412c9791.jpg"
+                                alt="">
+                        </a>
+                    @endif
 
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">ยินดีต้อนรับคุณ {{ Auth::user()->name }}</h5>
-                    <p class="card-text">
-                    <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
+
+                    {{-- <input type="email" name="email" value="{{ old( Auth::user()->email) }}"> --}}
+                    <h5 class="card-title">ยินดีต้อนรับคุณ <p class="fw-bold">{{ Auth::user()->name }} </p> </h5>
+                    <h3>{{ Auth::user()->email}}</h3>
+
+                    <form method="POST" action="{{route('update')}}">
                         @csrf
-                        <input type="file" name="image" accept="image/*" required>
-                        <button type="submit">Upload Image</button>
+                        <input type="text" name="name" value="{{ old('name', Auth::user()->name) }}">
+                        {{-- <input type="text" name="name" value="{{ old('name', Auth::user()->userID) }}"> --}}
+                        <button type="submit">chang name</button>
                     </form>
-                    </p>
+
+                    <form method="POST" action="{{route('deleteAccount')}}">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden"  name="userID" value="{{ old('name', Auth::user()->userID) }}">
+                        <input type="hidden"  name="name" value="{{ old('name', Auth::user()->name) }}">
+                        <input type="hidden"  name="email" value="{{ old('name', Auth::user()->email) }}">
+                        <button type="submit">delete accoutn</button>
+                    </form>
+
+                    <p class="card-text">
+
                     <p class="card-text"><small class="text-body-secondary">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit">logout</button>
                             </form>
+
                         </small></p>
                 </div>
             </div>

@@ -39,18 +39,26 @@
 
         <form method="GET" action="{{ route('home') }}" class="d-flex form-input mt-1" role="search">
             <div class="search-container">
-                <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search" name="search">
+                <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search"
+                    name="search">
                 <i class="fas fa-search search-icon"></i>
             </div>
             <div class="user-bag">
                 @auth
-                    @foreach ($images as $image)
-                        <!-- ถ้าล็อกอินอยู่, ให้เปลี่ยนลิงก์ไปยัง 'profile' -->
+                    @if ($images->isNotEmpty())
+                        @foreach ($images as $image)
+                            <a href="{{ route('profile') }}">
+                                <img src="{{ asset('storage/images/' . $image->filename) }}" alt="">
+                            </a>
+                        @endforeach
+                    @else
                         <a href="{{ route('profile') }}">
-                            <img src="{{ asset('storage/images/' . $image->filename) }}" alt="">
-                            {{-- <img src="{{ asset('storage/images/' . $images->filename) }}" alt=""> --}}
+                            <img src="https://i.pinimg.com/564x/98/49/c6/9849c6bf0f1338a3ea9b2eca412c9791.jpg"
+                                alt="">
                         </a>
-                    @endforeach
+                    @endif
+
+
                     <a href="{{ route('cart') }}">
                         <i class="text-white fa-solid fa-cart-shopping"></i>
                     </a>

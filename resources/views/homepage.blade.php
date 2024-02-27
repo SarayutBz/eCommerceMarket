@@ -31,6 +31,10 @@
 
     <div class="Recommended-Products container">
         <h3 class="">Recommended Products</h3>
+        {{-- @foreach ($images as $image)
+        <h3>{{$image}}</h3>
+        @endforeach --}}
+        <hr>
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-md-4">

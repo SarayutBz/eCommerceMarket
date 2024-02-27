@@ -45,7 +45,10 @@ class CartController extends Controller
         $userId = Auth()->user()->getAttributes()['userID'];
         $images = Image::where('userID', $userId)->get();
 
-
+        if($carts->isEmpty()){
+            // dd($carts->isEmpty());
+            return view('cart.cart', compact('carts','images'));
+        }
 
     // return response()->json(['data' => $carts]);
 
@@ -53,4 +56,21 @@ class CartController extends Controller
     return view('cart.cart', compact('carts','images'));
 
     }
+    public function delete(Request $request)
+    {
+        $order = $request->validate([
+            'productID' => 'required|exists:products,productID',
+            'userID' => 'required',
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|integer|min:0',
+        ]);
+
+        // Modify the query to match 'userID' instead of 'productID'
+        Cart::where('productID', $order['productID'])
+        ->where('userID', $order['userID'])
+        ->delete();
+
+        return redirect('cart');
+    }
+
 }

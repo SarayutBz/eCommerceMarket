@@ -11,7 +11,7 @@ class Cart extends Model
 {
     use HasFactory,HasApiTokens;
     protected $table = 'cart'; // ระบุชื่อตาราง
-
+    protected $primaryKey = 'cartID';
     protected $fillable = [
         'productID',
         'userID',

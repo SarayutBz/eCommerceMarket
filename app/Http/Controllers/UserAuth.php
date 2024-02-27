@@ -12,22 +12,41 @@ use Illuminate\Validation\ValidationException;
 class UserAuth extends Controller
 {
 
+    public function deleteAccount(Request $request){
+        $user = $request->validate([
+
+            'userID' => 'required',
+            'email' => 'required',
+            'name' => 'required',
+
+        ]);
+
+        User::where('userID', $user['userID'])
+        ->where('email', $user['email'])
+        ->delete();
+
+        return redirect()->route('home');
+    }
 
 
-    public function updatename(Request $request){
-            // ตรวจสอบและรับข้อมูลจากฟอร์ม
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-    ]);
+    public function update(Request $request)
+    {
 
-    // ดึงข้อมูลผู้ใช้ที่ล็อกอินอยู่
-    $user = auth()->user();
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
 
-    // อัปเดตชื่อของผู้ใช้
-    $user->update($validatedData);
+        // Get the authenticated user
+        $user = auth()->user();
 
-    // หลังจากอัปเดตสำเร็จ, สามารถให้ redirect หรือแสดงหน้า View ตามต้องการ
-    return view('auth.profile');
+        // Update the user's name
+        $user->update($validatedData);
+
+        // Add a success flash message
+        session()->flash('success', 'Your name has been updated successfully.');
+
+        // Redirect to a specific route or view
+        return redirect()->route('profile'); // Adjust the route name accordingly
     }
 
     public function profile(){
@@ -67,25 +86,29 @@ class UserAuth extends Controller
     }
 
     public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'email' => 'required|string|email',
+        'password' => 'required|string',
+    ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $user = Auth::user();
-            $token = $user->createToken('auth_token')->plainTextToken;
+    if (Auth::attempt($request->only('email', 'password'))) {
+        $user = Auth::user();
+        $token = $user->createToken('auth_token')->plainTextToken;
 
-            // Redirect after successfully logging in
-            return redirect()->route('home');
-        }
+        // Correct way to get user ID
+        $userId = $user->id;
 
-        // If authentication fails
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    
+        return redirect()->route('home');
+    }
+
+    // If authentication fails
+    throw ValidationException::withMessages([
+        'email' => ['The provided credentials are incorrect.'],
+    ]);
+}
+
+
 
         // $request->validate([
         //     'email' => 'required|string|email',
@@ -110,7 +133,7 @@ class UserAuth extends Controller
 
 
         // return response()->json(['token' => $token], 200);
-    }
+
 
     public function logout(Request $request)
     {
@@ -122,7 +145,6 @@ class UserAuth extends Controller
         return redirect()->route('home');
 
     }
-
 
 
 

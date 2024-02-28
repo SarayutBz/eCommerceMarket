@@ -40,12 +40,54 @@
         </div>
         <h1 class="title_text">ORDERS</h1>
         <div class="container">
-            @yield('Orders')
+            <form action="{{ route('orders.show') }}" method="GET" class="tool_bar">
+                @csrf
+                <button class="tool_btn" type="submit" name="status" value="waiting of delivery">
+                    waiting of delivery
+                </button>
+                <button class="tool_btn" type="submit" name="status" value="currently shipping">
+                    currently shipping
+                </button>
+                <button class="tool_btn" type="submit" name="status" value="successfully">
+                    successfully
+                </button>
+                <button class="tool_btn" name="status" value="cancel shipping">
+                    cancel shipping
+                </button>
+
+            </form>
+            <h1 style="text-decoration: underline;margin: 10px; ">waiting of delivery</h1>
+            <div class="table-data">
+                @if(isset($message))
+                <p>{{ $message }}</p>
+                @else
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">User ID</th>
+                            <th scope="col">Total Amount</th>
+                            <th scope="col">Order Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(isset($orders) && count($orders) > 0)
+                        @foreach ($orders as $order)
+                        <tr>
+                            <td>{{ $order['orderID'] }}</td>
+                            <td>{{ $order['userID'] }}</td>
+                            <td>{{ $order['totalAmount'] }}</td>
+                            <td>{{ $order['orderstatus'] }}</td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
+                @endif
+            </div>
         </div>
 
     </main>
-
-
 </body>
 
 </html>

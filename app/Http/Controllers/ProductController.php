@@ -10,8 +10,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(){
-        return view('admin.Orders');
+    public function index()
+    {
+        $jsonData = file_get_contents(storage_path('app/dataTest/test.json'));
+        $data = json_decode($jsonData, true);
+        return view('admin.Orders', compact('data'));
     }
 
     /**

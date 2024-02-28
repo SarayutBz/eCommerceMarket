@@ -2,7 +2,7 @@
 
 use App\Models\Product;
 use App\Http\Controllers\UserAuth;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +39,5 @@ Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
 //profile
 Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
 
-Route::get('/CheckOrders', [ProductController::class, 'index'])->name('Orders');
+Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
+Route::get('/CheckOrders/status', [OrderController::class, 'showOrders'])->name('orders.show');

@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+        * {
+            font-family: 'EB Garamond', serif;
+        }
+        .bbep-text{
+            margin-left: 180px;
+        }
+
+        .menu-bar {
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-bar img {
+            width: 70px;
+            height: 70px;
+        }
+
+        .form-input {
+            float: right;
+        }
+
+        .form-input input,
+        i {
+            margin: 5px;
+        }
+
+        .form-control {
+            border: none;
+            border-radius: 50px;
+        }
+
+
+
+        .form-control::placeholder {
+            font-size: 22px;
+            color: white;
+            border: none;
+             opacity: 1;
+        }
+
+        .form-control {
+            background-color: #838282;
+        }
+
+        .submenu-bar {
+            padding: 10px;
+            background-color: #e5e5e5;
+        }
+
+        .submenu-bar p {
+            margin: 2px
+        }
+
+        .img-carousel {
+            margin: 20px;
+            text-align: center;
+            max-width: 90%;
+            max-height: 20%;
+        }
+
+        .carousel-item img {
+
+            height: 70%;
+        }
+
+        .carousel-item {
+            max-width: 100%;
+
+        }
+
+        .img-carousel img {
+            object-fit: cover;
+            width: 100%;
+            height: 450px !important;
+        }
+
+        .items {
+            text-align: center;
+            display: flex;
+            justify-content: center
+        }
+
+        .card {
+            margin: 20px;
+            border: none;
+
+        }
+
+        .card img {
+            object-fit: cover;
+            width: 100%;
+            height: 250px !important;
+        }
+
+        a {
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .Recommended-Products {
+            text-align: center;
+        }
+
+        .Recommended-Products h3 {
+            display: inline-block;
+            border-bottom: 2px solid rgb(0, 0, 0);
+            padding-bottom: 5px;
+            margin: 0;
+        }
+
+        .search-container {
+            position: relative;
+            margin-right: 5px;
+            color: white;
+        }
+        .search-container input{
+            width: 150px;
+        }
+
+        .search-input {
+            padding-right: 30px;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 40%;
+            right: 10px;
+            /* Adjust the right position as needed */
+            transform: translateY(-50%);
+            pointer-events: none;
+            /* Ensure the icon doesn't interfere with input interaction */
+        }
+
+        .search-container i {
+            font-size: 16px;
+        }
+
+        .user-bag i {
+            font-size: 32px;
+        }
+
+        /* .card  img {
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+
+        .card img:hover  {
+            -webkit-filter: grayscale(0);
+            filter: grayscale(0);
+        } */
+
+        .card img {
+            -webkit-filter: grayscale(0) blur(0);
+            filter: grayscale(0) blur(0);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+
+        .card img:hover {
+            cursor: pointer;
+            -webkit-filter: grayscale(100%) blur(3px);
+            filter: grayscale(100%) blur(3px);
+        }
+
+        .items .card:hover {
+            border: 1px solid black;
+        }
+
+        .card .row .col-md-4 img {
+            height: 100%;
+            max-width: 100%;
+            /* object-fit: cover; */
+        }
+
+        .submenu-bar a p {
+            color: black;
+        }
+
+        .submenu-bar a:hover p {
+            color: white;
+        }
+
+        .price i {
+            background-color: rgb(79, 78, 78);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .price i:hover {
+            background-color: rgb(129, 127, 127);
+            cursor: pointer;
+        }
+
+        .number-add-remove.d-flex {
+            display: flex;
+            align-items: center;
+            margin: 0px;
+
+
+
+        }
+
+        .number-add-remove button {
+            border: none;
+            width: 50px;
+        }
+
+        .number-add-remove input {
+            width: 100px;
+            text-align: center;
+            margin-top: 2px;
+            line-height: 30px;
+
+        }
+
+        .card {
+            border-radius: 10px;
+            /* border: 0.2px solid black; */
+            box-shadow: 4px 7px 8px rgba(0, 0, 0, 0.1);
+            /* ตั้งค่าเงา */
+        }
+
+        .card-text small.text-body-secondary,
+        .card-body {
+            margin-bottom: 0;
+            padding-bottom: 0px;
+        }
+        i:hover{
+            cursor: pointer;
+        }
+

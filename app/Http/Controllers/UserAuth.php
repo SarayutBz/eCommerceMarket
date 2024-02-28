@@ -10,6 +10,9 @@ use Illuminate\Validation\ValidationException;
 
 class UserAuth extends Controller
 {
+    public function index(){
+        return view('Orders');
+    }
 
 
     public function profile(){

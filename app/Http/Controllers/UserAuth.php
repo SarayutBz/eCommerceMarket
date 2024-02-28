@@ -11,6 +11,9 @@ use Illuminate\Validation\ValidationException;
 
 class UserAuth extends Controller
 {
+    public function forgotpassword(){
+        return view('auth.forgotpassword');
+    }
 
     public function deleteAccount(Request $request){
         $user = $request->validate([

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 
@@ -83,4 +84,12 @@ Route::delete('/delete',[CartController::class,'delete'])->name('delete-cart');
 
 Route::post('/updatename', [UserAuth::class, 'update'])->name('update');
 Route::delete('/deleteAccount', [UserAuth::class, 'deleteAccount'])->name('deleteAccount');
+
+Route::get('/forgot-password',[UserAuth::class, 'forgotpassword'])->name('forgotpassword');
+
+Route::post('/send',[MailController::class,'index'])->name('send');
+
+Route::get('/reset-password',[MailController::class,'showReset'])->name('showReset');
+
+Route::post('/reset',[MailController::class,'reset'])->name('reset');
 

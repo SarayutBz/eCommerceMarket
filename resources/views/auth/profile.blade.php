@@ -110,7 +110,11 @@
                         {{-- <input type="text" name="name" value="{{ old('name', Auth::user()->userID) }}"> --}}
                         <button type="submit">chang name</button>
                     </form>
-
+                    <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="image" accept="image/*" required>
+                        <button type="submit">Upload Image</button>
+                    </form>
                     <form method="POST" action="{{route('deleteAccount')}}">
                         @csrf
                         @method('DELETE')

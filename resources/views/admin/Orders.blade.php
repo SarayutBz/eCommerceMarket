@@ -35,7 +35,7 @@
             </div>
             <div class="btn_check3">
                 <h1>Check</h1>
-                <h4>sales</h4>
+                <h4>saless</h4>
             </div>
         </div>
         <h1 class="title_text">ORDERS</h1>

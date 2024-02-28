@@ -38,15 +38,13 @@
                 <h4>sales</h4>
             </div>
         </div>
-
         <h1 class="title_text">ORDERS</h1>
-
         <div class="container">
             @yield('Orders')
         </div>
 
     </main>
-    
+
 
 </body>
 

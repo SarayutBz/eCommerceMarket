@@ -56,7 +56,9 @@
                 </button>
 
             </form>
-            <h1 style="text-decoration: underline;margin: 10px; ">waiting of delivery</h1>
+            @if(isset($status))
+            <h1 style="text-decoration: underline;margin: 10px; ">{{ $status }}</h1>
+
             <div class="table-data">
                 @if(isset($message))
                 <p>{{ $message }}</p>
@@ -85,6 +87,7 @@
                 </table>
                 @endif
             </div>
+            @endif
         </div>
 
     </main>

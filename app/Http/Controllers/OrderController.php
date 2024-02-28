@@ -24,9 +24,9 @@ class OrderController extends Controller
             return $order['orderstatus'] === $status;
         });
         if ($filteredOrders->isEmpty()) {
-            return view('admin.Orders', ['data' => $data, 'message' => 'ไม่พบข้อมูล']);
+            return view('admin.Orders', ['data' => $data, 'message' => 'ไม่พบข้อมูล', 'status' => $status]);
         } else {
-            return view('admin.Orders', ['data' => $data, 'orders' => $filteredOrders]);
+            return view('admin.Orders', ['data' => $data, 'orders' => $filteredOrders, 'status' => $status]);
         }
     }
 }

@@ -1,11 +1,17 @@
 <?php
 
+use App\Models\Image;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Http\Controllers\UserAuth;
-use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +23,32 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/home', [ProductController::class, 'index'])->name('home');
+
+Route::get('/home', function (Request $request) {
+
+// $products = Product::all();
+$search = $request->search;
+if ($search != '') {
+    $products = Product::where('name', 'like', '%' . $search . '%')->orWhere('price', 'like', $search)->get();
+} else {
+    $products = Product::all();
+}
+
+$images = []; // Initialize the $images array
+
+if (Auth::check()) {
+    // User is logged in
+    $userId = Auth()->user()->getAttributes()['userID'];
+    $images = Image::where('userID', $userId)->get();
+    // return response()->json(['data'=>$images]);
+    return view('homepage', compact('products', 'images'));
+}
+return view('homepage', compact('products', 'images'));
+
+
+    // dd($images);
+    // return response()->json(['data'=>$images]);
+})->name('home');
 
 // หน้า แรก เว็บ welcome
 
@@ -36,5 +67,29 @@ Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
 //profile
 Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
 
-Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
-Route::get('/CheckOrders/status', [OrderController::class, 'showOrders'])->name('orders.show');
+Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+
+
+
+Route::get('/', [ImageController::class, 'index']);
+Route::post('/upload', [ImageController::class, 'upload'])->name('upload');
+
+
+
+Route::resource('products', ProductController::class);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+Route::delete('/delete',[CartController::class,'delete'])->name('delete-cart');
+
+Route::post('/updatename', [UserAuth::class, 'update'])->name('update');
+Route::delete('/deleteAccount', [UserAuth::class, 'deleteAccount'])->name('deleteAccount');
+
+Route::get('/forgot-password',[UserAuth::class, 'forgotpassword'])->name('forgotpassword');
+
+Route::post('/send',[MailController::class,'index'])->name('send');
+
+Route::get('/reset-password',[MailController::class,'showReset'])->name('showReset');
+
+Route::post('/reset',[MailController::class,'reset'])->name('reset');
+

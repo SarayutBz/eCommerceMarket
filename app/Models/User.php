@@ -12,20 +12,25 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $primaryKey = 'userID';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
 
-     protected $primaryKey = 'userID';
+    //  protected $primaryKey = 'userID';
 
     protected $fillable = [
         'name',
         'email',
         'password',
-        
+
     ];
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'userID');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

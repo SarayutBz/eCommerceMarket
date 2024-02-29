@@ -118,7 +118,7 @@
             color: white;
         }
         .search-container input{
-            width: 150px;
+            width: 190px;
         }
 
         .search-input {
@@ -137,6 +137,7 @@
 
         .search-container i {
             font-size: 16px;
+            margin-bottom: 2px;
         }
 
         .user-bag i {
@@ -234,4 +235,15 @@
         i:hover{
             cursor: pointer;
         }
-
+        .price button{
+            border: none;
+            background-color: none;
+           border-radius: 80%;
+           padding: 0;
+        }
+        .user-bag img{
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }

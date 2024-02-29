@@ -1,5 +1,3 @@
-<!---Orders.blade-->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,57 +13,64 @@
 
 <body class="body">
     @include('layouts.adminHeader')
-
     <main class="Main_body">
         @include('layouts.btnGroup')
         <h1 class="title_text">ORDERS</h1>
         <div class="container">
             <div class="tool_bar">
-
-                <button class="tool_btn">
+                <a href="{{ route('orders.waiting') }}" class="tool_btn">
                     waiting of delivery
-                </button>
-                <button class="tool_btn">
+                </a>
+                <a href="{{ route('orders.shipping') }}" class="tool_btn">
                     currently shipping
-                </button>
-                <button class="tool_btn">
+                </a>
+                <a href="{{ route('orders.success') }}" class="tool_btn">
                     successfully
-                </button>
-                <button class="tool_btn">
+                </a>
+                <a href="{{ route('orders.cancel') }}" class="tool_btn">
                     cancel shipping
-                </button>
+                </a>
             </div>
-
-
+            <h1 style="text-decoration: underline;margin: 10px; ">currently shipping</h1>
 
             <div class="table-data">
-                <h1 style="text-decoration: underline;margin: 10px; ">pppppp</h1>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Order ID</th>
                             <th scope="col">User ID</th>
                             <th scope="col">Total Amount</th>
+                            <th scope="col">address</th>
                             <th scope="col">Order Status</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        @if($data->count() > 0)
                         @foreach ($data as $order)
                         <tr>
-                            <td>{{ $order['orderID'] }}</td>
-                            <td>{{ $order['userID'] }}</td>
-                            <td>{{ $order['totalAmount'] }}</td>
-                            <td>{{ $order['orderstatus'] }}</td>
+                            <td>{{ $order->orderID }}</td>
+                            <td>{{ $order->userID }}</td>
+                            <td>{{ $order->totalAmount }}</td>
+                            <td class="col-ta">--------------------------------------------</td>
+                            <td>currently shipping
+                                <button>
+                                    ส่งสำเร็จ
+                                </button>
+                                <button>
+                                    ยกเลิกสินค้า
+                                </button>
+                            </td>
                         </tr>
                         @endforeach
-
+                        @else
+                        <tr>
+                            <td colspan="4">No orders found</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
-
             </div>
-
-
+        </div>
     </main>
     @include('layouts.footer')
 </body>

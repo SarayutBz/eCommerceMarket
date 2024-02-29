@@ -17,7 +17,10 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'orderID'=> rand(1,1000),
+            'userID' => rand(1,250),
+            'totalAmount' => $this->faker->randomNumber(4),
+            'orederstatus' => rand(0,3),
         ];
     }
 }

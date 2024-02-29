@@ -1,3 +1,6 @@
+.body {
+    height: 1200px;
+}
 .Header_bar {
     background-color: #0078bc;
     color: white;
@@ -13,12 +16,12 @@
     text-align: center;
     width: 100%;
     padding: 5px;
-    
+    left: 0;
+    bottom: 0;
 }
 
 .Main_body {
     border-radius: 10px;
-    
 }
 
 .btnGroup {
@@ -71,5 +74,11 @@
 }
 .table-data {
     margin-inline: 30px;
-    height: 500px;
+    height: 650px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.col-table {
+    width: 200px;
+    overflow-x: auto;
 }

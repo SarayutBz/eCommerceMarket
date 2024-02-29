@@ -12,7 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,3 +93,7 @@ Route::get('/reset-password',[MailController::class,'showReset'])->name('showRes
 
 Route::post('/reset',[MailController::class,'reset'])->name('reset');
 
+Route::get('/CheckOrders/waiting', [OrderController::class, 'waiting'])->name('orders.waiting');
+Route::get('/CheckOrders/shipping', [OrderController::class, 'shipping'])->name('orders.shipping');
+Route::get('/CheckOrders/success', [OrderController::class, 'success'])->name('orders.success');
+Route::get('/CheckOrders/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');

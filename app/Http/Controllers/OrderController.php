@@ -4,31 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+
 
 class OrderController extends Controller
 {
-    public function index()
+    public function waiting(Request $request)
     {
-        $jsonData = File::get(storage_path('app/dataTest/test.json'));
-        $data = json_decode($jsonData, true);
-        
-        $status = 'waiting of delivery';
-        return view('admin.Orders', compact('data', 'status'));
+        $data = Order::where('orederstatus', 1)->get();
+        return view('admin.waiting', compact('data'));
     }
-    public function showOrders(Request $request)
+
+    public function shipping(Request $request)
     {
-        $jsonData = File::get(storage_path('app/dataTest/test.json'));
-        $data = json_decode($jsonData, true);
-        $status = $request->input('status');
-        $filteredOrders = collect($data['order'])->filter(function ($order) use ($status) {
-            return $order['orderstatus'] === $status;
-        });
-        if ($filteredOrders->isEmpty()) {
-            return view('admin.Orders', ['data' => $data, 'message' => 'ไม่พบข้อมูล', 'status' => $status]);
-        } else {
-            return view('admin.Orders', ['data' => $data, 'orders' => $filteredOrders, 'status' => $status]);
-        }
+        $data = Order::where('orederstatus', 2)->get();
+        return view('admin.currently', compact('data'));
+    }
+
+    public function success(Request $request)
+    {
+        $data = Order::where('orederstatus', 3)->get();
+        return view('admin.successfully', compact('data'));
+    }
+
+    public function cancel(Request $request)
+    {
+        $data = Order::where('orederstatus', 0)->get();
+        return view('admin.cancel', compact('data'));
     }
 }

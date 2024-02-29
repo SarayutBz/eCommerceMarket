@@ -1,5 +1,5 @@
 .Header_bar {
-    background-color: #0078BC;
+    background-color: #0078bc;
     color: white;
     padding-block: 10px;
     padding-inline: 30px;
@@ -8,10 +8,17 @@
     align-items: center;
     box-sizing: border-box;
 }
+.footer {
+    background-color: black;
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    
+}
 
 .Main_body {
     border-radius: 10px;
-    margin: 10px;
+    
 }
 
 .btnGroup {
@@ -24,24 +31,21 @@
 
 .btn_check1 {
     color: white;
-    background-color: #EB8484;
+    background-color: #eb8484;
     padding-inline: 40px;
     padding-block: 20px;
-    
 }
 .btn_check2 {
     color: white;
-    background-color: #648BD6;
+    background-color: #648bd6;
     padding-inline: 40px;
     padding-block: 20px;
-    
 }
 .btn_check3 {
     color: white;
-    background-color: #4AA24D;
+    background-color: #4aa24d;
     padding-inline: 40px;
     padding-block: 20px;
-    
 }
 .title_text {
     text-decoration: underline;
@@ -59,12 +63,13 @@
     margin-block: 10px;
 }
 .tool_btn {
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     text-align: center;
     padding: 10px 10px;
     margin: 0px;
     border: solid 0.5px;
 }
-.table-data{
+.table-data {
     margin-inline: 30px;
+    height: 500px;
 }

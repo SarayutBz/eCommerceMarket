@@ -13,36 +13,16 @@
     <link rel="stylesheet" href="{{ asset('css/Admin.css') }}">
 </head>
 
-<body>
-    <header class="Header_bar">
-        <div>
-            <h3>BBEP</h3>
-        </div>
-        <div>
-            <i class="fa-solid fa-circle-user fa-2xl"></i>
-        </div>
-    </header>
+<body style="height: max-content;">
+    @include('layouts.adminHeader')
 
     <main class="Main_body">
-        <div class="btnGroup">
-            <div class="btn_check1">
-                <h1>Check</h1>
-                <h4>stock products</h4>
-            </div>
-            <div class="btn_check2">
-                <h1>Check</h1>
-                <h4>orders</h4>
-            </div>
-            <div class="btn_check3">
-                <h1>Check</h1>
-                <h4>saless</h4>
-            </div>
-        </div>
+        @include('layouts.btnGroup')
         <h1 class="title_text">ORDERS</h1>
         <div class="container">
             <form action="{{ route('orders.show') }}" method="GET" class="tool_bar">
                 @csrf
-                <button class="tool_btn" type="submit" name="status" value="waiting of delivery">
+                <button class="tool_btn" type="submit" name="status" value="waiting of delivery"  @if(!isset($status) || $status == 'waiting of delivery') selected @endif>
                     waiting of delivery
                 </button>
                 <button class="tool_btn" type="submit" name="status" value="currently shipping">
@@ -54,7 +34,6 @@
                 <button class="tool_btn" name="status" value="cancel shipping">
                     cancel shipping
                 </button>
-
             </form>
             @if(isset($status))
             <h1 style="text-decoration: underline;margin: 10px; ">{{ $status }}</h1>
@@ -89,8 +68,8 @@
             </div>
             @endif
         </div>
-
     </main>
+    @include('layouts.footer')
 </body>
 
 </html>

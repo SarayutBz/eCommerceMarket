@@ -13,7 +13,9 @@ class OrderController extends Controller
     {
         $jsonData = File::get(storage_path('app/dataTest/test.json'));
         $data = json_decode($jsonData, true);
-        return view('admin.Orders', compact('data'));
+        
+        $status = 'waiting of delivery';
+        return view('admin.Orders', compact('data', 'status'));
     }
     public function showOrders(Request $request)
     {

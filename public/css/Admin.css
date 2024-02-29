@@ -37,18 +37,21 @@
     background-color: #eb8484;
     padding-inline: 40px;
     padding-block: 20px;
+    text-decoration: none;
 }
 .btn_check2 {
     color: white;
     background-color: #648bd6;
     padding-inline: 40px;
     padding-block: 20px;
+    text-decoration: none;
 }
 .btn_check3 {
     color: white;
     background-color: #4aa24d;
     padding-inline: 40px;
     padding-block: 20px;
+    text-decoration: none;
 }
 .title_text {
     text-decoration: underline;
@@ -71,6 +74,18 @@
     padding: 10px 10px;
     margin: 0px;
     border: solid 0.5px;
+    text-decoration: none;
+    color: black;
+}
+.tool_btn:hover {
+    background-color: #ebebeb;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 0px;
+    border: solid 0.5px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
 }
 .table-data {
     margin-inline: 30px;

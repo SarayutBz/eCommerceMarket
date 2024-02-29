@@ -33,11 +33,19 @@ class ImageController extends Controller
         $user = Auth::user();
 
         // Associate the image with the user by adding 'userID'
-        $user->images()->create(['filename' => $imageName]);
-
         $userId = Auth()->user()->getAttributes()['userID'];
         $images = Image::where('userID', $userId)->get();
+        // dd($images);
+        if($images->isEmpty()){
 
-        return view('auth.profile',compact('images'));
+            $user->images()->create(['filename' => $imageName]);
+        }
+        else{
+            $user->images()->update(['filename' => $imageName]);
+
+        }
+
+        // return view('auth.profile',compact('images'));
+        return redirect()->route('profile')->with('images', $images);
     }
 }

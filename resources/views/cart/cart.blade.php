@@ -46,8 +46,13 @@
                         </div>
                     @endforeach
                     @php
-
-                        $sumTotal = $cart->sum('price');
+                        $userID = auth()->id();
+                        $userCart = App\Models\Cart::where('userID', $userID)->get();
+                        if ($userCart->count() > 0) {
+                        $sumTotal = $userCart->sum('price');
+                        } else {
+                            $sumTotal = 0;
+                        }
 
                     @endphp
 

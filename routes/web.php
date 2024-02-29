@@ -88,8 +88,13 @@ Route::delete('/deleteAccount', [UserAuth::class, 'deleteAccount'])->name('delet
 Route::get('/forgot-password',[UserAuth::class, 'forgotpassword'])->name('forgotpassword');
 
 Route::post('/send',[MailController::class,'index'])->name('send');
+Route::post('/sendagian',[MailController::class,'sendagian'])->name('sendagian');
 
-Route::get('/reset-password',[MailController::class,'showReset'])->name('showReset');
+Route::get('/code',[MailController::class,'showReset'])->name('code');
+
 
 Route::post('/reset',[MailController::class,'reset'])->name('reset');
 
+Route::get('/reset-password',[MailController::class,'ResetPageview'])->name('resetpage');
+
+Route::post('/UpdatePassword',[MailController::class,'UpdatePassword'])->name('UpdatePassword');

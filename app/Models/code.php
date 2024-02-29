@@ -12,7 +12,8 @@ class code extends Model
 
     protected  $fillable = [
         'email',
-        'code'
+        'code',
+       
     ];
 
 }

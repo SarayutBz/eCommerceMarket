@@ -10,7 +10,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $jsonData = file_get_contents(storage_path('app/dataTest/test.json'));
         $data = json_decode($jsonData, true);

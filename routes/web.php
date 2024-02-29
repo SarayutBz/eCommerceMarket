@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
@@ -98,3 +99,5 @@ Route::post('/reset',[MailController::class,'reset'])->name('reset');
 Route::get('/reset-password',[MailController::class,'ResetPageview'])->name('resetpage');
 
 Route::post('/UpdatePassword',[MailController::class,'UpdatePassword'])->name('UpdatePassword');
+Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
+Route::get('/CheckOrders/status', [OrderController::class, 'showOrders'])->name('orders.show');

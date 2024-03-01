@@ -101,7 +101,8 @@
                 <div class="card-body">
 
                     {{-- <input type="email" name="email" value="{{ old( Auth::user()->email) }}"> --}}
-                    <h5 class="card-title">ยินดีต้อนรับคุณ <p class="fw-bold">{{ Auth::user()->name }} </p> </h5>
+                    <h5 class="card-title">ยินดีต้อนรับคุณ </h5>
+                    <p class="text-center fs-2 fw-bold alert alert-warning" role="alert">{{ Auth::user()->name }} </p>
                     <h3>{{ Auth::user()->email}}</h3>
 
                     <form method="POST" action="{{route('update')}}">
@@ -110,29 +111,35 @@
                         {{-- <input type="text" name="name" value="{{ old('name', Auth::user()->userID) }}"> --}}
                         <button type="submit">chang name</button>
                     </form>
+
                     <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="image" accept="image/*" required>
-                        <button type="submit">Upload Image</button>
+                        <button class="mt-2" type="submit">Upload Image</button>
                     </form>
-                    <form method="POST" action="{{route('deleteAccount')}}">
+
+                    <div class="box d-flex">
+                        <form method="POST" action="{{route('deleteAccount')}}">
                         @csrf
                         @method('DELETE')
                         <input type="hidden"  name="userID" value="{{ old('name', Auth::user()->userID) }}">
                         <input type="hidden"  name="name" value="{{ old('name', Auth::user()->name) }}">
                         <input type="hidden"  name="email" value="{{ old('name', Auth::user()->email) }}">
-                        <button type="submit">delete accoutn</button>
+                        <button class="btn btn-danger" type="submit">delete accoutn</button>
                     </form>
 
-                    <p class="card-text">
 
-                    <p class="card-text"><small class="text-body-secondary">
-                            <form action="{{ route('logout') }}" method="POST">
+                    <p class=" mx-2 card-text"><small class="text-body-secondary">
+                        <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit">logout</button>
+                                <button class="btn btn-warning" type="submit">logout</button>
                             </form>
+                        </small>
+                    </p>
+                    </div>
 
-                        </small></p>
+
+
                 </div>
             </div>
         </div>

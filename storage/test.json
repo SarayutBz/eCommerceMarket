@@ -1,0 +1,28 @@
+{
+    "order": [
+        {
+            "orderID": 1,
+            "userID": 1000123,
+            "totalAmount": 1000,
+            "orderstatus": "successfully"
+        },
+        {
+            "orderID": 2,
+            "userID": 1000133,
+            "totalAmount": 1040,
+            "orderstatus": "waiting of delivery"
+        },
+        {
+            "orderID": 3,
+            "userID": 1000163,
+            "totalAmount": 1040,
+            "orderstatus": "currently shipping"
+        },
+        {
+            "orderID": 4,
+            "userID": 10001373,
+            "totalAmount": 1110,
+            "orderstatus": "waiting of delivery"
+        }
+    ]
+}

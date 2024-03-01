@@ -41,16 +41,15 @@
                     <div class="card mb-4">
                         <img src="{{ $product->imageurl }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-title fw-bold">{{ $product->name }}</p>
+                            <p class="card-title fw-bold fs-3">{{ $product->name }}</p>
                             <p class="card-text">{{ $product->description }}</p>
 
-                            <div class="price d-flex ">
+                            <div class="price d-flex justify-content-around ">
 
                                 <form method="POST" action="{{ route('addCart') }}">
                                     @csrf <!-- เพิ่ม CSRF token เพื่อความปลอดภัย -->
                                     <input type="hidden" name="userID" value="{{ auth()->id() }}">
                                     <input type="hidden" name="productID" value="{{ $product->productID }}">
-                                    <input type="hidden" name="quantity" value="1">
                                     <!-- ตั้งค่าปริยายให้เป็น 1 หรือตามต้องการ -->
                                     <input type="hidden" name="price" value="{{ $product->price }}">
                                     <!-- ตั้งค่าปริยายให้เป็น 1 หรือตามต้องการ -->
@@ -61,11 +60,16 @@
                                     @else
                                         <p>กรุณาเข้าสู่ระบบก่อนที่จะเพิ่มรายการในตะกร้า</p>
                                     @endauth
-                                </form>
+
 
                                 <div class="text">
-                                    <p class="m-2 fs-5">{{ $product->price }}</p>
+                                    <p class="m-2 fs-4 fw-bold">{{  number_format($product->price) }} Bath</p>
+                                    <input class="w-50 " type="number" name="quantity"   min="1" max="{{ $product->stockquantity }}">
+
+                                    {{-- <input class="w-50" type="number" name="quantity" id="" value="1" min="1" max="{{$product->stockquantity}}"> --}}
+                                    <div class=""><p>Quantity: {{$product->stockquantity }} </p> </div>
                                 </div>
+</form>
 
                             </div>
 

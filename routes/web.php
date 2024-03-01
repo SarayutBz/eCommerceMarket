@@ -12,6 +12,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -101,3 +102,12 @@ Route::get('/reset-password',[MailController::class,'ResetPageview'])->name('res
 Route::post('/UpdatePassword',[MailController::class,'UpdatePassword'])->name('UpdatePassword');
 Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
 Route::get('/CheckOrders/status', [OrderController::class, 'showOrders'])->name('orders.show');
+
+Route::post('/cart/all', [CartController::class, 'getAllItems'])->name('order');
+
+// Route::post('/payment', [CartController::class, 'payment'])->name('payment');
+Route::get('/payment', [paymentController::class, 'showForm'])->name('payment');
+
+Route::post('/paymentpost', [paymentController::class, 'paymentapi'])->name('paymentpost');
+
+Route::post('/test', [paymentController::class, 'test'])->name('test');

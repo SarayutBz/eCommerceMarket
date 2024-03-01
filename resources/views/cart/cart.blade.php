@@ -1,71 +1,78 @@
 @extends('layout')
-<style>
 
-</style>
 @section('content')
     <h3 class="mt-3">Your shopping bag</h3>
     <hr>
-    {{-- @foreach ($carts as $cart)
-<h3>{{$cart}}</h3>
-@endforeach --}}
+
     @if (isset($carts))
         @if ($carts->isEmpty())
             <p>ไม่มีสินค้าใดๆ</p>
         @else
             <div class="box d-flex justify-content-center">
-                <div class="box2  d-inline">
+                <div class="box2 d-inline">
+
+                    @csrf
                     @foreach ($carts as $cart)
-                        <div class="card  d-inline   mb-3" style="max-width: 540px;">
-                            <div class="row border-bottom  p-4 g-0">
+                        <div class="card d-inline mb-3" style="max-width: 540px;">
+                            <div class="row border-bottom p-4 g-0">
                                 <div class="col-md-4">
                                     <img src="{{ $cart->imageurl }}" class="img-fluid rounded-start" alt="...">
+                                    <label class="text-bg-light p-3" for="">จำนวนสินค้าคงเหลือ :
+                                        {{ $cart->stockquantity - $cart->quantity }}</label>
+                                    <form method="POST" action="{{ route('delete-cart') }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="userID" value="{{ auth()->id() }}">
+                                        <input type="hidden" name="productID" value="{{ $cart->productID }}">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input type="hidden" name="price" value="{{ $cart->price }}">
+                                        <button type="submit" class="mt-2 btn btn-danger text-white d-flex"
+                                            onclick="return confirm('Are you sure you want to delete the cart?')">Cancel</button>
+                                    </form>
+
+
                                 </div>
+
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold">{{ $cart->name }}</h5>
                                         <hr>
-                                        <p class=" alert alert-light" role="alert">{{ $cart->description }}</p>
+                                        <p class="alert alert-light" role="alert">{{ $cart->description }}</p>
+
+                                        <div class="box-price ">
+                                            <p class="fs-4 card-text mt-5 "><span>ราคา </span>
+                                                {{ number_format($cart->price) }}</p>
+
+                                        <p class="" > จำนวนสิ้นค้าที่ซื้อ : {{ $cart->quantity }}</p>
 
 
-                                        <p class="fs-4 card-text mt-5 "> <span>ราคา </span>{{ $cart->price }}</p>
-                                        <form method="POST" action="{{ route('delete-cart') }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="userID" value="{{ auth()->id() }}">
-                                            <input type="hidden" name="productID" value="{{ $cart->productID }}">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <!-- ตั้งค่าปริยายให้เป็น 1 หรือตามต้องการ -->
-                                            <input type="hidden" name="price" value="{{ $cart->price }}">
-                                            <button type="submit" class="btn btn-danger text-white d-flex"
-                                                onclick="return confirm('Are you sure you want to delete the cart?')">Cancel</button>
-                                        </form>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+
                     @php
                         $userID = auth()->id();
                         $userCart = App\Models\Cart::where('userID', $userID)->get();
-                        if ($userCart->count() > 0) {
-                        $sumTotal = $userCart->sum('price');
-                        } else {
-                            $sumTotal = 0;
-                        }
 
+                        if ($userCart->count() > 0) {
+                            $sumTotal = $userCart->sum('price');
+                            $formattedSumTotal = number_format($sumTotal);
+                        } else {
+                            $formattedSumTotal = 0;
+                        }
                     @endphp
 
-                    <h3 class="text-end">Total Price : {{ $sumTotal }}</h3>
-                    <form class="d-flex justify-content-end" action="">
+                    <h3 class="text-end">Total Price : {{ $formattedSumTotal }} bath</h3>
+                    <div class="d-flex justify-content-end">
+                        <a href="{{route('payment')}}"> <button type="submit" class="btn btn-dark">Pay</button></a>
+                    </div>
 
-                        <button class=" btn btn-dark ">Pay</button>
-                    </form>
+                </div>
+            </div>
         @endif
     @endif
-
-
-    </div>
-
-    </div>
 @endsection

@@ -11,15 +11,15 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $jsonData = File::get(storage_path('app/dataTest/test.json'));
+        $jsonData = File::get(storage_path('test.json'));
         $data = json_decode($jsonData, true);
-        
+
         $status = 'waiting of delivery';
         return view('admin.Orders', compact('data', 'status'));
     }
     public function showOrders(Request $request)
     {
-        $jsonData = File::get(storage_path('app/dataTest/test.json'));
+        $jsonData = File::get(storage_path('test.json'));
         $data = json_decode($jsonData, true);
         $status = $request->input('status');
         $filteredOrders = collect($data['order'])->filter(function ($order) use ($status) {

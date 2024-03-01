@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Cart;
 use App\Models\Image;
+use App\Models\order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -20,7 +23,7 @@ class CartController extends Controller
         // ตรวจสอบข้อมูลที่ส่งมา
         $order = $request->validate([
             'productID' => 'required|exists:products,productID',
-            'userID'=>'required',
+            'userID' => 'required',
             'quantity' => 'required|integer|min:1',
             'price' => 'required|integer|min:0',
         ]);
@@ -33,7 +36,8 @@ class CartController extends Controller
 
     }
 
-    public function cart(){
+    public function cart()
+    {
         $userID = Auth()->user()->getAttributes()['userID'];
 
         $carts = Cart::join('products', 'cart.productID', '=', 'products.productID')
@@ -45,15 +49,15 @@ class CartController extends Controller
         $userId = Auth()->user()->getAttributes()['userID'];
         $images = Image::where('userID', $userId)->get();
 
-        if($carts->isEmpty()){
+        if ($carts->isEmpty()) {
             // dd($carts->isEmpty());
-            return view('cart.cart', compact('carts','images'));
+            return view('cart.cart', compact('carts', 'images'));
         }
 
-    // return response()->json(['data' => $carts]);
+        // return response()->json(['data' => $carts]);
 
 
-    return view('cart.cart', compact('carts','images'));
+        return view('cart.cart', compact('carts', 'images'));
 
     }
     public function delete(Request $request)
@@ -67,10 +71,27 @@ class CartController extends Controller
 
         // Modify the query to match 'userID' instead of 'productID'
         Cart::where('productID', $order['productID'])
-        ->where('userID', $order['userID'])
-        ->delete();
+            ->where('userID', $order['userID'])
+            ->delete();
 
         return redirect('cart');
+    }
+    public function getAllItems()
+    {
+        // $cartItems = Cart::all();
+        // $userId = auth()->user()->userID;
+        // $userId = auth()->user()->id;
+        // $cartItems = Cart::where('userID', $userId)
+        //     ->select('productID', 'userID', 'quantity', DB::raw('SUM(price) OVER () as total'))
+        //     ->get();
+    //     $totalPrice = Cart::where('userID', $userId)->sum('price');
+    //    $order= order::create([
+    //         'userID' => $userId,
+    //         'totalAmount' => $totalPrice,
+    //         'orederstatus' => 'รอตรวจสอบการชำระเงิน'
+    //     ]);
+
+        // return response()->json($order);
     }
 
 }

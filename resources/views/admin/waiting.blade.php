@@ -42,6 +42,7 @@
                             <th scope="col">Order ID</th>
                             <th scope="col">User ID</th>
                             <th scope="col">Total Amount</th>
+                            <th scope="col">price</th>
                             <th scope="col">address</th>
                             <th scope="col">Order Status</th>
                         </tr>
@@ -53,15 +54,9 @@
                             <td>{{ $order->orderID }}</td>
                             <td>{{ $order->userID }}</td>
                             <td>{{ $order->totalAmount }}</td>
+                            <td>----</td>
                             <td class="col-ta">--------------------------------------------</td>
-                            <td>waiting of delivery
-                                <button>
-                                    ส่งสินค้า
-                                </button>
-                                <button>
-                                    ยกเลิกสินค้า
-                                </button>
-                            </td>
+                            <td>waiting of delivery</td>
                         </tr>
                         @endforeach
                         @else

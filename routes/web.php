@@ -13,6 +13,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StockController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,24 +27,24 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/home', function (Request $request) {
 
-// $products = Product::all();
-$search = $request->search;
-if ($search != '') {
-    $products = Product::where('name', 'like', '%' . $search . '%')->orWhere('price', 'like', $search)->get();
-} else {
-    $products = Product::all();
-}
+    // $products = Product::all();
+    $search = $request->search;
+    if ($search != '') {
+        $products = Product::where('name', 'like', '%' . $search . '%')->orWhere('price', 'like', $search)->get();
+    } else {
+        $products = Product::all();
+    }
 
-$images = []; // Initialize the $images array
+    $images = []; // Initialize the $images array
 
-if (Auth::check()) {
-    // User is logged in
-    $userId = Auth()->user()->getAttributes()['userID'];
-    $images = Image::where('userID', $userId)->get();
-    // return response()->json(['data'=>$images]);
+    if (Auth::check()) {
+        // User is logged in
+        $userId = Auth()->user()->getAttributes()['userID'];
+        $images = Image::where('userID', $userId)->get();
+        // return response()->json(['data'=>$images]);
+        return view('homepage', compact('products', 'images'));
+    }
     return view('homepage', compact('products', 'images'));
-}
-return view('homepage', compact('products', 'images'));
 
 
     // dd($images);
@@ -80,20 +81,22 @@ Route::post('/upload', [ImageController::class, 'upload'])->name('upload');
 Route::resource('products', ProductController::class);
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::delete('/delete',[CartController::class,'delete'])->name('delete-cart');
+Route::delete('/delete', [CartController::class, 'delete'])->name('delete-cart');
 
 Route::post('/updatename', [UserAuth::class, 'update'])->name('update');
 Route::delete('/deleteAccount', [UserAuth::class, 'deleteAccount'])->name('deleteAccount');
 
-Route::get('/forgot-password',[UserAuth::class, 'forgotpassword'])->name('forgotpassword');
+Route::get('/forgot-password', [UserAuth::class, 'forgotpassword'])->name('forgotpassword');
 
-Route::post('/send',[MailController::class,'index'])->name('send');
+Route::post('/send', [MailController::class, 'index'])->name('send');
 
-Route::get('/reset-password',[MailController::class,'showReset'])->name('showReset');
+Route::get('/reset-password', [MailController::class, 'showReset'])->name('showReset');
 
-Route::post('/reset',[MailController::class,'reset'])->name('reset');
+Route::post('/reset', [MailController::class, 'reset'])->name('reset');
 
 Route::get('/CheckOrders/waiting', [OrderController::class, 'waiting'])->name('orders.waiting');
 Route::get('/CheckOrders/shipping', [OrderController::class, 'shipping'])->name('orders.shipping');
 Route::get('/CheckOrders/success', [OrderController::class, 'success'])->name('orders.success');
 Route::get('/CheckOrders/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+
+Route::get('/CheckStock', [StockController::class, 'index'])->name('stock.index');

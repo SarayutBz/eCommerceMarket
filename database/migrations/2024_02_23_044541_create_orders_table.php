@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('userID')->references('userID')->on('users')->onDelete('cascade');
             $table->integer('totalAmount');
             $table->integer('orederstatus');
+            $table->integer('stockquantity');
+          
         });
 
     }

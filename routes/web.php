@@ -3,7 +3,7 @@
 use App\Models\Product;
 use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +38,7 @@ Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
 //profile
 Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
 
+
+//chart NEW
+
+Route::get('/userchart', [BarController::class, 'BarChart']);

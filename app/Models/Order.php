@@ -5,26 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Order extends Model
 {
-    protected $primaryKey = 'productID';
+    protected $primaryKey = 'orderID';
 
     // ประกาศความสัมพันธ์
     public function category()
     {
-        return $this->belongsTo(Category::class, 'categoryID');
+        return $this->belongsTo(order::class, 'orderID');
         
     }
 
     protected $fillable = [
-        'productID',
-        'name',
-        'description',
-        'price',
-        'stockquantity',
-        'imageurl',
-        'categoryID',
+       
+        
+        'totalAmount',
+       
+        
+        
     ];
     
 }
-

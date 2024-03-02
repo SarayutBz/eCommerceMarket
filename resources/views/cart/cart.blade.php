@@ -18,7 +18,7 @@
                                 <div class="col-md-4">
                                     <img src="{{ $cart->imageurl }}" class="img-fluid rounded-start" alt="...">
                                     <label class="text-bg-light p-3" for="">จำนวนสินค้าคงเหลือ :
-                                        {{ $cart->stockquantity - $cart->quantity }}</label>
+                                        {{ max(0, $cart->stockquantity - $cart->quantity) }}
                                     <form method="POST" action="{{ route('delete-cart') }}">
                                         @csrf
                                         @method('DELETE')
@@ -63,6 +63,7 @@
                         if ($userCart->count() > 0) {
                             $sumTotal = $userCart->sum('price') * $quantity ;
                             $formattedSumTotal = number_format($sumTotal);
+
                         } else {
                             $formattedSumTotal = 0;
                         }

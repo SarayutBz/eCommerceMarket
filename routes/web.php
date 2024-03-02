@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -110,4 +111,6 @@ Route::get('/payment', [paymentController::class, 'showForm'])->name('payment');
 
 Route::post('/paymentpost', [paymentController::class, 'paymentapi'])->name('paymentpost');
 
-Route::post('/test', [paymentController::class, 'test'])->name('test');
+Route::get('/stock', [AdminController::class, 'stock'])->name('stock');
+Route::get('/check', [AdminController::class, 'check'])->name('check');
+Route::get('/saless', [AdminController::class, 'saless'])->name('saless');

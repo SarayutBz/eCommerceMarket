@@ -1,33 +1,20 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserAuth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\paymentController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// หน้า แรก เว็บ welcome
+// HomePage
 Route::get('/', function (Request $request) {
 
     // ส่วนของ การ search หาชื่อ สินค้า
@@ -48,65 +35,70 @@ Route::get('/', function (Request $request) {
         return view('homepage', compact('products', 'images'));
     }
     return view('homepage', compact('products', 'images'));
-
-
-    // dd($images);
-    // return response()->json(['data'=>$images]);
 })->name('home');
 
+// Sorry Page
+Route::get('/sorry ', [UserAuth::class, 'sorry'])->name('sada');
 
 
-
-// หน้า register
+//  register
 Route::get('/register', [UserAuth::class, 'showRegister'])->name('register.r');
 Route::post('/register', [UserAuth::class, 'register'])->name('register');
 ;
 
-// หน้า login
+//  login
 Route::get('/login', [UserAuth::class, 'showLogin'])->name('login.l');
 Route::post('/login', [UserAuth::class, 'login'])->name('login');
 
+
 // logout
+Route::middleware('auth:sanctum')->group(function () {
 Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
 
-//profile
-Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
-
-Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
-Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-
-
-
+// profile + upload Image + Update name + Delete Account
+Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
 Route::post('/upload', [ImageController::class, 'upload'])->name('upload');
+Route::post('/update-name', [ProfileController::class, 'update'])->name('update');
+Route::delete('/deleteAccount', [ProfileController::class, 'deleteAccount'])->name('deleteAccount');
+
+});
 
 
 
-Route::resource('products', ProductController::class);
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+// cart + addCart + Delete Cart
+Route::middleware('auth.sanctum')->group(function () {
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+    Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
+    Route::delete('/delete', [CartController::class, 'delete'])->name('delete-cart');
 
-Route::delete('/delete', [CartController::class, 'delete'])->name('delete-cart');
 
-Route::post('/updatename', [UserAuth::class, 'update'])->name('update');
-Route::delete('/deleteAccount', [UserAuth::class, 'deleteAccount'])->name('deleteAccount');
+});
 
+//  Forgot Password + Send Email + Input Code + Reset Password
 Route::get('/forgot-password', [UserAuth::class, 'forgotpassword'])->name('forgotpassword');
-
-Route::post('/send', [MailController::class, 'index'])->name('send');
-Route::post('/sendagian', [MailController::class, 'sendagian'])->name('sendagian');
-
+Route::post('/send', [MailController::class, 'send'])->name('send');
+Route::post('/send-again', [MailController::class, 'sendagian'])->name('sendagian');
 Route::get('/code', [MailController::class, 'showReset'])->name('code');
-
-
 Route::post('/reset', [MailController::class, 'reset'])->name('reset');
-
 Route::get('/reset-password', [MailController::class, 'ResetPageview'])->name('resetpage');
-
 Route::post('/UpdatePassword', [MailController::class, 'UpdatePassword'])->name('UpdatePassword');
-Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
+
+// Admin + CRUD Product
+
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
+    Route::get('/stock', [AdminController::class, 'stock'])->name('stock');
+
+    // CRUD Product
+
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
-Route::post('/cart/all', [CartController::class, 'getAllItems'])->name('order');
-
-
-Route::get('/stock', [AdminController::class, 'stock'])->name('stock');
+});
 

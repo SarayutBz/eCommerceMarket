@@ -1,37 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Models\User;
-use App\Models\Image;
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class UserAuth extends Controller
+class UserController extends Controller
 {
-
-    public function sorry()
-    {
-        return view('sorrypage');
-    }
-    public function showRegister()
-    {
-        return view('auth.register');
-    }
-    public function showLogin()
-    {
-        return view('auth.login');
-    }
-
     public function register(Request $request)
     {
         // return response()->json(['reg' => $request], 201);
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string|',
         ]);
 
         $user = User::create([
@@ -40,9 +25,10 @@ class UserAuth extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        // $token = $user->createToken('auth_token')->plainTextToken;
 
-        return redirect()->route('login.l');
+        return response()->json(['message'=>'สำเร็จ']);
+        // return redirect()->route('login.l');
     }
 
     public function login(Request $request)
@@ -54,39 +40,40 @@ class UserAuth extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
+            $token = $user->createToken('user')->plainTextToken;
+            $userId = $user->userID;
 
-            if ($user->isAdmin()) {
-                $token = $user->createToken('admin')->plainTextToken;
-                return redirect()->route('Orders');
+            return response()->json(['message'=>'สำเร็จ','this is token'=>$token,'userID'=>$userId]);
 
-            } else {
-                $token = $user->createToken('user')->plainTextToken;
-                return redirect()->route('home');
-            }
-
-            // $userId = $user->id;
-
+            // return redirect()->route('home');
         }
 
         throw ValidationException::withMessages([
             'email' => ['The provided credentials are incorrect.'],
         ]);
     }
-    public function forgotpassword()
-    {
-        return view('auth.forgotpassword');
-    }
-
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
         Auth::guard('web')->logout();
 
 
-        return redirect()->route('home');
+        return response()->json(['message'=>'สำเร็จ']);
+
+        // return redirect()->route('home');
 
     }
+    public function update(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
 
+        $user = auth()->user();
+        $user->update($validatedData);
 
+        return response()->json(['message'=>'สำเร็จ','name-chang'=>$validatedData]);
+        // return redirect()->route('profile');
+    }
 
 }

@@ -6,7 +6,8 @@
 
 <form method="POST" action="{{ route('reset') }}">
     @csrf
-    <input type="text" name="code" required>
+    <input type="text" name="email" placeholder="Email" required>
+    <input type="text" name="code" placeholder="Code" required>
 <button type="submit">send</button>
 </form>
 

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('imageurl');
             $table->unsignedBigInteger('categoryID');
             $table->foreign('categoryID')->references('categoryID')->on('categories')->onDelete('cascade');
-            $table->string('code');
             $table->timestamps();
         });
     }

@@ -14,14 +14,16 @@ use Illuminate\Auth\Events\Validated;
 class MailController extends Controller
 {
 
-    public function index(Request $request)
+    public function send(Request $request)
     {
         try {
             return DB::transaction(function () use ($request) {
                 $randomNumber = mt_rand(100000, 999999);
                 $email = $request->email;
+                
+                $user = User::where('email', $request->email)->first();
+                $token = $user->createToken('user')->plainTextToken;
 
-                // Delete existing code for the same email
                 $result = DB::table('codes')
                     ->where('email', $email)
                     ->pluck('code')
@@ -34,7 +36,7 @@ class MailController extends Controller
                 // Send email
                 $data = [
                     'subject' => 'ball',
-                    'body' => 'กรุณา เอารหัสนี้ไปกรอก อิอิ  ' . $randomNumber,
+                    'body' => '  ' . $randomNumber,
                 ];
 
                 $codesend = new MailNotify($data);
@@ -59,7 +61,6 @@ class MailController extends Controller
         }
     }
 
-
     public function showReset()
     {
         return view('auth.code');
@@ -72,29 +73,24 @@ class MailController extends Controller
 
     public function reset(Request $request)
     {
-        // $result = DB::table('codes')
-        //     ->join('users', 'codes.email', '=', 'users.email')
-        //     ->select('codes.*', 'users.*') // Adjust the columns as needed
-        //     ->pluck('code');
-
-        // dd($result);
-
-        // return response()->json(['data'=>$request->code,'data2'=>$result]);
-
-        // if($request->code === $result[0]){
-        //     Code::where('code', $request->code)->delete();
-        // return response('เยี่ยมไอ้สัส');
+        // dd($request);
+        $code = code::where('email', $request->email)->first()->code;
+        if($code == $request->code){
+        // return response()->json('good');
         return redirect()->route('resetpage');
 
+        }
+        else{
+
+            return redirect()->route('forgotpassword');
+        }
+        // dd($code);
+
+        // return response()->json(['code'=>$code]);
+        // $code = code::where('userID',$userID);
 
 
-        // else{
-        //     return response('กากสัส');
 
-        // }
-
-
-        // return view('auth.reset');
     }
     public function ResetPage()
     {

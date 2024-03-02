@@ -1,9 +1,17 @@
 <!---adminHeader.blade-->
 <header class="Header_bar">
     <div>
-        <h3>BBEP</h3>
+        <a href="{{route('home')}}"><h3>BBEP</h3></a>
     </div>
     <div>
-        <i class="fa-solid fa-circle-user fa-2xl"></i>
+        <a href="{{route('profile')}}"> <i class="fa-solid fa-circle-user fa-2xl"></i></a>
+
     </div>
 </header>
+
+<style>
+    a{
+        color: white;
+        text-decoration: none;
+    }
+</style>

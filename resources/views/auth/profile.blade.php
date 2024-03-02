@@ -57,27 +57,6 @@
     </form>
 </div>
 
-{{--
-    <h3>Hello {{Auth::user()->name}}</h3>
-
-    <img src="{{$images}}" alt="" srcset="">
-    @foreach ($images as $image)
-        <img src="{{ asset('storage/images/' . $image->filename) }}" alt="Image">
-    @endforeach
-
-
-
-    <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Upload Image</button>
-    </form>
-
-
-    <form action="{{route('logout')}}" method="POST">
-        @csrf
-        <button type="submit">logout</button>
-    </form> --}}
 
 <div class="box-profile d-flex justify-content-center">
     <div class="card mb-3" style="max-width: 540px;">
@@ -102,7 +81,12 @@
 
                     {{-- <input type="email" name="email" value="{{ old( Auth::user()->email) }}"> --}}
                     <h5 class="card-title">ยินดีต้อนรับคุณ </h5>
+                    <h6 class="fw-bold">สถานะของคุณคือ : <h5 class="fs-2">{{Auth::user()->role}} </h5> </h6>
                     <p class="text-center fs-2 fw-bold alert alert-warning" role="alert">{{ Auth::user()->name }} </p>
+                    @if(Auth::user()->role == 'admin')
+                    <a href="{{route('Orders')}}"><button type="button" class="btn btn-danger">จัดการสินค้า</button> </a>
+                @endif
+
                     <h3>{{ Auth::user()->email}}</h3>
 
                     <form method="POST" action="{{route('update')}}">

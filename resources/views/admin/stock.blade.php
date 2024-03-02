@@ -23,8 +23,9 @@
         <h3>Product List</h3>
 
         <div class="new-product d-flex justify-content-end">
-            <button class="btn btn-success">➕ New </button>
+            <a href="{{ route('products.create') }}" class="btn btn-success">➕ New </a>
         </div>
+
 
         <table class="table table-striped table-hover">
             <thead>
@@ -46,8 +47,12 @@
                         <td><img src="{{ $product->imageurl }}" alt="" srcset="" width="50px" height="50px"></td>
                         <td>{{ number_format($product->price) }}</td>
                         <td>{{ $product->stockquantity }}</td>
-                        <td><button class="btn btn-warning">Edit</button></td>
-                        <td><button class="btn btn-danger" >Delete</button></td>
+                        <td><a href="{{ route('products.edit', $product) }}" class="btn btn-warning">Edit</a></td>
+                        <td> <form action="{{ route('products.destroy', $product) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form></td>
                     </tr>
                 @endforeach
             </tbody>

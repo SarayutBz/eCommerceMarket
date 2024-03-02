@@ -1,5 +1,5 @@
 <div class="btnGroup">
-    <a href="{{route('stock')}}">
+    <a href="{{ route('stock') }}">
         <div class="btn_check1">
             <h1>Check</h1>
             <h4>stock products</h4>
@@ -10,7 +10,7 @@
 </div>
 
 <style>
-    a{
+    a {
         text-decoration: none;
     }
 </style>

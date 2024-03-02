@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{ asset('css/loginpage.css') }}">
 
 <div class="menu-bar d-flex bg-dark">
-    <a href="{{route('home')}}"><i class="fa-solid fa-less-than text-white"></i></a>
+    <a href="{{ route('home') }}"><i class="fa-solid fa-less-than text-white"></i></a>
 
 
     <h3 class="text-white text ">BBEP</h3>
@@ -24,12 +24,13 @@
             <div class="card">
                 <div class="card-header">Forgot Password</div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('send')}}">
+                    <form method="POST" action="{{ route('send') }}">
                         @csrf
 
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                            <input id="email" type="email" class="form-control" name="email"
+                                value="{{ old('email') }}" required>
                         </div>
 
                         <div class="form-group w-50 mt-2">
@@ -44,4 +45,3 @@
         </div>
     </div>
 </div>
-

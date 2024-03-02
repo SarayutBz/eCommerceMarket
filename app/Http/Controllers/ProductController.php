@@ -12,62 +12,53 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request);
-        // $search = $request->search;
-        // if($search != ''){
-        //     $products = Product::where('name','like','%'.$search.'%')->Orwhere('price','like',$search)->get();
-        // }else{
-        //     $products = Product::all();
-        // }
-
-        // return view('homepage', compact('products'));
+        $product = Product::all();
+        return response()->json(['message' => 'สำรเ็จ', 'prodcut' => $product]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|string',
+            'price' => 'required|string',
+            'stockquantity' => 'required|string',
+            'description' => 'required|string',
+            'categoryID' => 'required|string',
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
+            'imageurl' => 'required|url',
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+        Product::create($request->all());
+
+        return redirect()->route('stock')->with('success', 'Product added successfully');
+    }
     public function edit(Product $product)
     {
-        //
+        return view('admin.products.edit', compact('product'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
-        //
+        $val = $request->validate([
+            'name' => 'required|string',
+            'price' => 'required|string',
+            'stockquantity' => 'required|string',
+            'imageurl' => 'required|url',
+
+        ]);
+        // dd($product);
+        $product->update($val);
+
+        return redirect()->route('stock')->with('success', 'Product updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
-        //
+        // dd($product);
+        $product->delete();
+        return redirect()->route('stock')->with('success', 'Product deleted successfully');
     }
 }

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
 
     ];
     public function images()
@@ -51,4 +52,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function isAdmin()
+    {
+        // Implement logic to check if the user is an admin
+        return $this->role === 'admin'; // Example: Check if the user role is 'admin'
+    }
 }

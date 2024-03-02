@@ -77,22 +77,5 @@ class CartController extends Controller
 
         return redirect('cart');
     }
-    public function getAllItems()
-    {
-        // $cartItems = Cart::all();
-        // $userId = auth()->user()->userID;
-        // $userId = auth()->user()->id;
-        // $cartItems = Cart::where('userID', $userId)
-        //     ->select('productID', 'userID', 'quantity', DB::raw('SUM(price) OVER () as total'))
-        //     ->get();
-    //     $totalPrice = Cart::where('userID', $userId)->sum('price');
-    //    $order= order::create([
-    //         'userID' => $userId,
-    //         'totalAmount' => $totalPrice,
-    //         'orederstatus' => 'รอตรวจสอบการชำระเงิน'
-    //     ]);
-
-        // return response()->json($order);
-    }
 
 }

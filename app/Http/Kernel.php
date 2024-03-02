@@ -21,6 +21,13 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
+    ];
+    protected $routeMiddleware = [
+        // Other middleware entries
+        'auth.sanctum' => \App\Http\Middleware\Authenticate::class,
+        'web' => \App\Http\Middleware\EncryptCookies::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 
     /**
@@ -37,6 +44,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
 
         'api' => [
@@ -47,6 +55,7 @@ class Kernel extends HttpKernel
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
                     'throttle:api',
                      \Illuminate\Routing\Middleware\SubstituteBindings::class,
+                      \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ],
     ];
 

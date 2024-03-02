@@ -71,9 +71,9 @@
 
                     <h3 class="text-end">Total Price : {{ $formattedSumTotal }} bath</h3>
                     <div class="d-flex justify-content-end">
-                        <a > <button type="submit" class="btn btn-dark">Pay</button></a>
+                        <a href="/sorry" > <button class="btn btn-dark">Pay</button></a>
                     </div>
-                    
+
 
                 </div>
             </div>

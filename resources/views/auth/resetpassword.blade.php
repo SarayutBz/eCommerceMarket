@@ -9,7 +9,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 {{-- <link rel="stylesheet" href="{{ asset('css/loginpage.css') }}"> --}}
-    <h3 class="text-center">แก้ไขรหัส</h3>
+    <h3 class="text-center">Reset Password</h3>
 
     <form method="post" action="{{route('UpdatePassword')}}">
         @csrf

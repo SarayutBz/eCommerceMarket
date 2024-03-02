@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'stockquantity' => 1,
             'imageurl' => $this->faker->imageUrl(640,480),
             'categoryID' => $this->faker->numberBetween(1, 3),
-            'code' => rand(100, 999) . chr(rand(65, 90)) . rand(10, 99) . chr(rand(65, 90)),
+            
         ];
     }
 }

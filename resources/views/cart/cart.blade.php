@@ -71,8 +71,9 @@
 
                     <h3 class="text-end">Total Price : {{ $formattedSumTotal }} bath</h3>
                     <div class="d-flex justify-content-end">
-                        <a href="{{route('payment')}}"> <button type="submit" class="btn btn-dark">Pay</button></a>
+                        <a > <button type="submit" class="btn btn-dark">Pay</button></a>
                     </div>
+                    
 
                 </div>
             </div>

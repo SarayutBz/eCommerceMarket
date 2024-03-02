@@ -15,39 +15,25 @@ class CartController extends Controller
 {
     public function addCart(Request $request)
     {
+        // dd($request);
+        if (!Auth::check()) {
+            return response()->json(['message' => 'กรุณาเข้าสู่ระบบก่อนที่จะเพิ่มรายการในตะกร้า'], 401);
+        }
+
         // ตรวจสอบข้อมูลที่ส่งมา
-$orderData = $request->validate([
-    'productID' => 'required|exists:products,productID',
-    'userID' => 'required',
-    'quantity' => 'required|integer|min:1',
-    'price' => 'required|integer|min:0',
-]);
+        $order = $request->validate([
+            'productID' => 'required|exists:products,productID',
+            'userID' => 'required',
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|integer|min:0',
+        ]);
 
-// Check if the order already exists
-$order = Cart::firstOrNew([
-    'productID' => $orderData['productID'],
-    'userID' => $orderData['userID'],
-]);
+        // สร้างรายการในตะกร้า
+        Cart::create($order);
 
-// If the order exists, update the quantity and price
-if ($order->exists) {
-    $order->quantity += $orderData['quantity'];
-    $order->price += $orderData['price'];
-} else {
-    // If the order is new, set the order data
-    $order->fill($orderData);
-}
 
-// Save the order
-$order->save();
-
-// Check if the order was created or updated
-if ($order->wasRecentlyCreated) {
-    return response()->json(['message' => 'รายการถูกเพิ่มในตะกร้าเรียบร้อยแล้ว', 'data' => $order], 201);
-} else {
-    // return response()->json(['message' => 'ไม่อนุญาติให้มีรายการซ้ำในตะกร้า'], 422);
-    return redirect()->route('cart')->with('สำเร็จ');
-}
+        // return response()->json(['message' => 'รายการถูกเพิ่มในตะกร้าเรียบร้อยแล้ว', 'data' => $order], 201);
+        return redirect()->route('cart');
 
     }
 

@@ -1,32 +1,32 @@
 @extends('layout')
 @section('content')
-<div class="img-carousel mx-auto h-100">
-    <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel" data-interval="300">
-        <div class="carousel-inner">
-            @forelse ($products as $key => $product)
-            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                <img src="{{ $product->imageurl }}" class="d-block w-100" alt="{{ $product->name }}">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ $product->name }}</h5>
-                    <p>{{ $product->description }}</p>
-                </div>
+    <div class="img-carousel mx-auto h-100">
+        <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel" data-interval="300">
+            <div class="carousel-inner">
+                @forelse ($products as $key => $product)
+                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                        <img src="{{ $product->imageurl }}" class="d-block w-100" alt="{{ $product->name }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ $product->name }}</h5>
+                            <p>{{ $product->description }}</p>
+                        </div>
+                    </div>
+                @empty
+                    <p>No products available.</p>
+                @endforelse
             </div>
-            @empty
-            <p>No products available.</p>
-            @endforelse
+
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
-</div>
 
 
     <div class="Recommended-Products container">
@@ -48,6 +48,8 @@
 
                                 <form method="POST" action="{{ route('addCart') }}">
                                     @csrf <!-- เพิ่ม CSRF token เพื่อความปลอดภัย -->
+                                    <input class="w-50" type="hidden" name="quantity" value="1"
+                                            min="1" max="{{ $product->stockquantity }}">
                                     <input type="hidden" name="userID" value="{{ auth()->id() }}">
                                     <input type="hidden" name="productID" value="{{ $product->productID }}">
                                     <!-- ตั้งค่าปริยายให้เป็น 1 หรือตามต้องการ -->
@@ -58,18 +60,20 @@
                                             <i class="text-white fa-solid fa-cart-plus"></i>
                                         </button>
                                     @else
-                                        <p>กรุณาเข้าสู่ระบบก่อนที่จะเพิ่มรายการในตะกร้า</p>
+                                        <p class="alert alert-danger" role="alert">
+                                            กรุณาเข้าสู่ระบบก่อนที่จะเพิ่มรายการในตะกร้า</p>
                                     @endauth
 
 
-                                <div class="text">
-                                    <p class="m-2 fs-4 fw-bold">{{  number_format($product->price) }} Bath</p>
-                                    <input class="w-50 " type="number" name="quantity"   min="1" max="{{ $product->stockquantity }}">
+                                    <div class="text">
+                                        <p class="m-2 fs-4 fw-bold"> {{ number_format($product->price) }} Bath</p>
 
-                                    {{-- <input class="w-50" type="number" name="quantity" id="" value="1" min="1" max="{{$product->stockquantity}}"> --}}
-                                    <div class=""><p>Quantity: {{$product->stockquantity }} </p> </div>
-                                </div>
-</form>
+
+                                        <div class="">
+                                            <p>Quantity: {{ $product->stockquantity }} </p>
+                                        </div>
+                                    </div>
+                                </form>
 
                             </div>
 

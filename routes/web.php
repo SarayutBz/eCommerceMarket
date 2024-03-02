@@ -27,38 +27,40 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/home', function (Request $request) {
+// หน้า แรก เว็บ welcome
+Route::get('/', function (Request $request) {
 
-// $products = Product::all();
-$search = $request->search;
-if ($search != '') {
-    $products = Product::where('name', 'like', '%' . $search . '%')->orWhere('price', 'like', $search)->get();
-} else {
-    $products = Product::all();
-}
+    // ส่วนของ การ search หาชื่อ สินค้า
+    $search = $request->search;
+    if ($search != '') {
+        $products = Product::where('name', 'like', '%' . $search . '%')->orWhere('price', 'like', $search)->get();
+    } else {
+        $products = Product::all();
+    }
 
-$images = []; // Initialize the $images array
+    $images = [];
 
-if (Auth::check()) {
-    // User is logged in
-    $userId = Auth()->user()->getAttributes()['userID'];
-    $images = Image::where('userID', $userId)->get();
-    // return response()->json(['data'=>$images]);
+    if (Auth::check()) {
+
+        $userId = Auth()->user()->getAttributes()['userID'];
+        $images = Image::where('userID', $userId)->get();
+
+        return view('homepage', compact('products', 'images'));
+    }
     return view('homepage', compact('products', 'images'));
-}
-return view('homepage', compact('products', 'images'));
 
 
     // dd($images);
     // return response()->json(['data'=>$images]);
 })->name('home');
 
-// หน้า แรก เว็บ welcome
+
 
 
 // หน้า register
 Route::get('/register', [UserAuth::class, 'showRegister'])->name('register.r');
-Route::post('/register', [UserAuth::class, 'register'])->name('register');;
+Route::post('/register', [UserAuth::class, 'register'])->name('register');
+;
 
 // หน้า login
 Route::get('/login', [UserAuth::class, 'showLogin'])->name('login.l');
@@ -75,7 +77,6 @@ Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 
 
 
-Route::get('/', [ImageController::class, 'index']);
 Route::post('/upload', [ImageController::class, 'upload'])->name('upload');
 
 
@@ -83,34 +84,29 @@ Route::post('/upload', [ImageController::class, 'upload'])->name('upload');
 Route::resource('products', ProductController::class);
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::delete('/delete',[CartController::class,'delete'])->name('delete-cart');
+Route::delete('/delete', [CartController::class, 'delete'])->name('delete-cart');
 
 Route::post('/updatename', [UserAuth::class, 'update'])->name('update');
 Route::delete('/deleteAccount', [UserAuth::class, 'deleteAccount'])->name('deleteAccount');
 
-Route::get('/forgot-password',[UserAuth::class, 'forgotpassword'])->name('forgotpassword');
+Route::get('/forgot-password', [UserAuth::class, 'forgotpassword'])->name('forgotpassword');
 
-Route::post('/send',[MailController::class,'index'])->name('send');
-Route::post('/sendagian',[MailController::class,'sendagian'])->name('sendagian');
+Route::post('/send', [MailController::class, 'index'])->name('send');
+Route::post('/sendagian', [MailController::class, 'sendagian'])->name('sendagian');
 
-Route::get('/code',[MailController::class,'showReset'])->name('code');
+Route::get('/code', [MailController::class, 'showReset'])->name('code');
 
 
-Route::post('/reset',[MailController::class,'reset'])->name('reset');
+Route::post('/reset', [MailController::class, 'reset'])->name('reset');
 
-Route::get('/reset-password',[MailController::class,'ResetPageview'])->name('resetpage');
+Route::get('/reset-password', [MailController::class, 'ResetPageview'])->name('resetpage');
 
-Route::post('/UpdatePassword',[MailController::class,'UpdatePassword'])->name('UpdatePassword');
+Route::post('/UpdatePassword', [MailController::class, 'UpdatePassword'])->name('UpdatePassword');
 Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
-Route::get('/CheckOrders/status', [OrderController::class, 'showOrders'])->name('orders.show');
+
 
 Route::post('/cart/all', [CartController::class, 'getAllItems'])->name('order');
 
-// Route::post('/payment', [CartController::class, 'payment'])->name('payment');
-Route::get('/payment', [paymentController::class, 'showForm'])->name('payment');
-
-Route::post('/paymentpost', [paymentController::class, 'paymentapi'])->name('paymentpost');
 
 Route::get('/stock', [AdminController::class, 'stock'])->name('stock');
-Route::get('/check', [AdminController::class, 'check'])->name('check');
-Route::get('/saless', [AdminController::class, 'saless'])->name('saless');
+

@@ -16,47 +16,38 @@ class MailController extends Controller
 
     public function index(Request $request)
     {
-        $randomNumber = mt_rand(100000, 999999);
-
-
-
-        $data = [
-            'subject' => 'ball',
-            'body' => 'กรุณา เอารหัสนี้ไปกรอก อิอิ  ' . $randomNumber,
-        ];
-
-        $codesend = new MailNotify($data);
-
         try {
-            $result = DB::table('codes')
-            ->join('users', 'codes.email', '=', 'users.email')
-            ->select('codes.*', 'users.*') // Adjust the columns as needed
-            ->pluck('code');
+            return DB::transaction(function () use ($request) {
+                $randomNumber = mt_rand(100000, 999999);
+                $email = $request->email;
 
-            // dd($result);
-            $email = $request->email;
+                // Delete existing code for the same email
+                $result = DB::table('codes')
+                    ->where('email', $email)
+                    ->pluck('code')
+                    ->first();
 
+                if ($result) {
+                    Code::where('code', $result)->delete();
+                }
 
-            if($result){
-                Code::where('code', $result)->delete();
+                // Send email
+                $data = [
+                    'subject' => 'ball',
+                    'body' => 'กรุณา เอารหัสนี้ไปกรอก อิอิ  ' . $randomNumber,
+                ];
+
+                $codesend = new MailNotify($data);
                 Mail::to($email)->send($codesend);
-                Code::create([
 
-                    'code' => $randomNumber,
-                    'email' => $request->email,
-                ]);
-                // \Log::info('Email sent with value: ' . $email);
-                return redirect()->route('code')->with('email',$email);
-            }
-            else{
-                Mail::to($request->email)->send($codesend);
+                // Create new code
                 Code::create([
-
                     'code' => $randomNumber,
-                    'email' => $request->email,
+                    'email' => $email,
                 ]);
-                return redirect()->route('code');
-            }
+
+                return redirect()->route('code')->with('email', $email);
+            });
 
         } catch (\Exception $th) {
             \Log::error('Error sending email: ' . $th->getMessage());
@@ -67,6 +58,7 @@ class MailController extends Controller
             ]);
         }
     }
+
 
     public function showReset()
     {
@@ -85,14 +77,14 @@ class MailController extends Controller
         //     ->select('codes.*', 'users.*') // Adjust the columns as needed
         //     ->pluck('code');
 
-            // dd($result);
+        // dd($result);
 
-            // return response()->json(['data'=>$request->code,'data2'=>$result]);
+        // return response()->json(['data'=>$request->code,'data2'=>$result]);
 
         // if($request->code === $result[0]){
         //     Code::where('code', $request->code)->delete();
-            // return response('เยี่ยมไอ้สัส');
-            return redirect()->route('resetpage');
+        // return response('เยี่ยมไอ้สัส');
+        return redirect()->route('resetpage');
 
 
 
@@ -104,11 +96,13 @@ class MailController extends Controller
 
         // return view('auth.reset');
     }
-    public function ResetPage(){
+    public function ResetPage()
+    {
         return view('resetpassword');
     }
 
-    public function UpdatePassword(Request $request){
+    public function UpdatePassword(Request $request)
+    {
 
         // dd($request);
         $user = User::where('email', $request->email)->first();
@@ -118,7 +112,7 @@ class MailController extends Controller
             'password' => 'required|string|confirmed',
         ]);
 
-        $user ->update([
+        $user->update([
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);

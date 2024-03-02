@@ -56,10 +56,12 @@
 
                     @php
                         $userID = auth()->id();
+                        $quantity = App\Models\Cart::where('userID', $userID)->pluck('quantity')->first();
                         $userCart = App\Models\Cart::where('userID', $userID)->get();
 
+
                         if ($userCart->count() > 0) {
-                            $sumTotal = $userCart->sum('price');
+                            $sumTotal = $userCart->sum('price') * $quantity ;
                             $formattedSumTotal = number_format($sumTotal);
                         } else {
                             $formattedSumTotal = 0;

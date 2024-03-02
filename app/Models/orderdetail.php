@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class payment extends Model
+class orderdetail extends Model
 {
     use HasFactory;
-    protected $table = 'payments';
+    protected $table = 'orderdetails';
 
-    protected $fillable = ['filename','price','userID','status'];
+    protected $fillable = ['orderID','productID','quantity','price'];
 }

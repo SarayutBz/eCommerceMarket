@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('orderID');
             $table->unsignedBigInteger('userID');
             $table->foreign('userID')->references('userID')->on('users')->onDelete('restrict');
-            $table->integer('totalAmount');
-            $table->string('orederstatus');
+            // $table->integer('totalAmount');
+            // $table->string('orederstatus');
             $table->timestamps();
 
         });

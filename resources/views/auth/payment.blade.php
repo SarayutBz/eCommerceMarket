@@ -66,6 +66,7 @@
                     <label class="input-group-text" for="inputGroupFile01">Upload</label>
                     <input class="form-control" type="file" name="filename" accept="image/*" required>
                 </div>
+                <input type="hidden" type="numer" name="userID" value="{{Auth::user()->userID}}">
 
                 <button type="submit" class="btn btn-dark">Send</button>
             </div>

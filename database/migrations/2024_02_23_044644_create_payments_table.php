@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('filename');
             $table->unsignedBigInteger('userID')->nullable();
             $table->foreign('userID')->references('userID')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('orderID');
-            $table->foreign('orderID')->references('orderID')->on('orders')->onDelete('cascade');
-            $table->integer('Amount');
+            // $table->unsignedBigInteger('orderID');
+            // $table->foreign('orderID')->references('orderID')->on('orders')->onDelete('cascade');
+            $table->integer('price');
+            $table->string('status');
             $table->timestamps();
 
         });

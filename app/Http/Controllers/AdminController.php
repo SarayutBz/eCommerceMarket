@@ -8,20 +8,12 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function stock(){
-     $products=   Product::orderBy('productID')->get();
-        return view('admin.stock',compact('products'));
+    public function stock()
+    {
+        // ทำการดึงข้อมูล product มาเก็บใน $products
+        $products = Product::orderBy('productID')->get();
+        return view('admin.stock', compact('products'));
     }
-    public function order(){
-     $products=   order::orderBy('orderID')->get();
-        return view('admin.Order',compact('products'));
-    }
-    public function saless(){
-     $products=   Product::orderBy('productID')->get();
-        return view('admin.Saless',compact('products'));
-    }
-    public function check(){
-     $products=   Product::orderBy('productID')->get();
-        return view('admin.Check',compact('products'));
-    }
+
+
 }

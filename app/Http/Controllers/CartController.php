@@ -16,6 +16,7 @@ class CartController extends Controller
     public function addCart(Request $request)
     {
         // dd($request);
+        //เช็กว่าทำการ login เข้ามาหรือยัง ถ้ายังให้แสดงข้อความนี้
         if (!Auth::check()) {
             return response()->json(['message' => 'กรุณาเข้าสู่ระบบก่อนที่จะเพิ่มรายการในตะกร้า'], 401);
         }
@@ -39,23 +40,19 @@ class CartController extends Controller
 
     public function cart()
     {
+        //หาค่า userID มาเก็บที่ userID
         $userID = Auth()->user()->getAttributes()['userID'];
-
+        // ทำการ join เพื่อ เอา สินค้าที่ user แต่ละคนเพิ่งลง ในตระกร้า
         $carts = Cart::join('products', 'cart.productID', '=', 'products.productID')
             ->whereIn('cart.productID', Product::pluck('productID'))
             ->where('cart.userID', $userID) // Filter by userID
             ->select('cart.*', 'products.*')
             ->get();
 
+         //หาค่า userID มาเก็บที่ userID
         $userId = Auth()->user()->getAttributes()['userID'];
+        // เอารูป user มาแสดงตรง tab menubar
         $images = Image::where('userID', $userId)->get();
-
-        if ($carts->isEmpty()) {
-            // dd($carts->isEmpty());
-            return view('cart.cart', compact('carts', 'images'));
-        }
-
-        // return response()->json(['data' => $carts]);
 
 
         return view('cart.cart', compact('carts', 'images'));
@@ -63,6 +60,7 @@ class CartController extends Controller
     }
     public function delete(Request $request)
     {
+        // ทำการตรวจสอบข้อมูลที่ส่งมาใน request
         $order = $request->validate([
             'productID' => 'required|exists:products,productID',
             'userID' => 'required',
@@ -70,7 +68,7 @@ class CartController extends Controller
             'price' => 'required|integer|min:0',
         ]);
 
-        // Modify the query to match 'userID' instead of 'productID'
+        // ทำการแก้ไขคำสั่งเพื่อให้ลบรายการที่ตรงกับ productID และ userID ที่ได้รับจากข้อมูลที่ผ่านการตรวจสอบ.
         Cart::where('productID', $order['productID'])
             ->where('userID', $order['userID'])
             ->delete();

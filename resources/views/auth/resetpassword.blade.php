@@ -23,14 +23,14 @@
 
             <div class="input-group flex-nowrap mt-4 w-25 mx-auto">
                 <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-key"></i></span>
-                <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" required>
+                <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="รหัสผ่านต้องมีอย่างน้อย 8 ตัว, ประกอบด้วยอักขระใหญ่, ตัวเลข, และอักขระพิเศษ" required>
             </div>
 
             <div class="input-group flex-nowrap mt-4 w-25 mx-auto">
-                <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-repeat"></i></i></span>
-                <input type="password" class="form-control form-control-lg" name="password_confirmation" placeholder="Password Confirm" required>
-
+                <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-repeat"></i></span>
+                <input type="password" class="form-control form-control-lg" name="password_confirmation" placeholder="Password Confirm" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="รหัสผ่านต้องมีอย่างน้อย 8 ตัว, ประกอบด้วยอักขระใหญ่, ตัวเลข, และอักขระพิเศษ" required>
             </div>
+
 
 
             <div class="d-flex justify-content-center mt-5">

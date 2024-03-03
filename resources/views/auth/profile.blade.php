@@ -56,7 +56,7 @@
 </div>
 
 <div class="box-profile d-flex justify-content-center">
-    <div class="card mb-3" style="max-width: 540px;">
+    <div class="card p-3 mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-4">
                 @if ($images->isNotEmpty())
@@ -78,19 +78,36 @@
 
                     {{-- <input type="email" name="email" value="{{ old( Auth::user()->email) }}"> --}}
                     <h5 class="card-title">ยินดีต้อนรับคุณ </h5>
-                    <h6 class="fw-bold">สถานะของคุณคือ : <h5 class="fs-2">{{Auth::user()->role}} </h5> </h6>
                     <p class="text-center fs-2 fw-bold alert alert-warning" role="alert">{{ Auth::user()->name }} </p>
+                    <h6 class="fw-bold @if(Auth::user()->role == 'admin') text-danger @endif">
+                        สถานะของคุณคือ :
+                        <span class="badge rounded-pill @if(Auth::user()->role == 'admin') bg-danger text-light @else badge rounded-pill text-bg-success @endif">
+                            {{ Auth::user()->role }}
+                        </span>
+                    </h6>
+
+
                     @if(Auth::user()->role == 'admin')
-                    <a href="{{route('Orders')}}"><button type="button" class="btn btn-danger">จัดการสินค้า</button> </a>
+                    <a href="{{route('Orders')}}"><button type="button" class="btn btn-success">จัดการสินค้า</button> </a>
                 @endif
 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+              <div class="card p-3">
+                <div class="card-body">
                     <h3>{{ Auth::user()->email}}</h3>
 
                     <form method="POST" action="{{route('update')}}">
                         @csrf
                         <input type="text" name="name" value="{{ old('name', Auth::user()->name) }}">
                         {{-- <input type="text" name="name" value="{{ old('name', Auth::user()->userID) }}"> --}}
-                        <button type="submit">chang name</button>
+                        <button class="btn btn-dark" type="submit">Update</button>
                     </form>
 
                     <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
@@ -115,10 +132,10 @@
                             </form>
                         </small>
                     </p>
-                    </div>
                 </div>
+              </div>
             </div>
-        </div>
+
     </div>
 </div>
 

@@ -47,8 +47,13 @@
             </div>
 
             <div class="mb-3">
-                <label for="categoryID" class="form-label">Product categoryID</label>
+                <label for="categoryID" class="form-label">Product CategoryID</label>
                 <input type="text" class="form-control" id="categoryID" name="categoryID" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="Categoryname" class="form-label">Product CategoryName</label>
+                <input type="text" class="form-control" id="Categoryname" name="categoryname" required>
             </div>
 
             <!-- Add form fields for other product attributes -->

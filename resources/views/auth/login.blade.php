@@ -53,16 +53,9 @@
     <div class="Question">
         <span>I don't have an account. <a href="{{route('register.r')}}">Create Account.
             </a> </span>
-        <div class="mt-4">
-
-            <span class="mt-5">Or</span>
-        </div>
+        
     </div>
 
 </div>
 
-<div class="icon-login d-flex justify-content-center">
-    <i class="fa-brands fa-google"></i>
-    <i class="fa-brands fa-facebook"></i>
-    <i class="fa-brands fa-apple"></i>
-</div>
+

@@ -21,8 +21,8 @@ class MailController extends Controller
                 $randomNumber = mt_rand(100000, 999999);
                 $email = $request->email;
                 
-                $user = User::where('email', $request->email)->first();
-                $token = $user->createToken('user')->plainTextToken;
+                // $user = User::where('email', $request->email)->first();
+                // $token = $user->createToken('user')->plainTextToken;
 
                 $result = DB::table('codes')
                     ->where('email', $email)

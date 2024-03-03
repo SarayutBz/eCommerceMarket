@@ -17,7 +17,7 @@
     <div class="card-forgot">
         <div class="title-forgot">Forgot Password ?</div>
 
-        <form method="" action="{{ route('send') }}">
+        <form method="POST" action="{{ route('send') }}">
             @csrf
 
             <div class="mb-3">

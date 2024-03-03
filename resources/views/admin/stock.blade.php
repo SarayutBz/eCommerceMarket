@@ -23,7 +23,7 @@
         <h3>Product List</h3>
 
         <div class="new-product d-flex justify-content-end">
-            <a href="{{ route('products.create') }}" class="btn btn-success">➕ New </a>
+            <a href="{{ route('products.create') }}" class="btn btn-success"><i class="fa-solid fa-plus fa-sm" style="color: #ffffff;"></i> New </a>
         </div>
 
 

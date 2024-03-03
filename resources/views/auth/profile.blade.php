@@ -20,7 +20,6 @@
 
     </div>
 
-
     <form method="get" action="{{ route('home') }}" class="d-flex form-input mt-1" role="search">
         <div class="search-container">
             <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search">
@@ -41,7 +40,6 @@
                     </a>
                 @endif
 
-
                 <a href="{{ route('cart') }}">
                     <i class="text-white fa-solid fa-cart-shopping"></i>
                 </a>
@@ -56,7 +54,6 @@
         </div>
     </form>
 </div>
-
 
 <div class="box-profile d-flex justify-content-center">
     <div class="card mb-3" style="max-width: 540px;">
@@ -111,8 +108,6 @@
                         <input type="hidden"  name="email" value="{{ old('name', Auth::user()->email) }}">
                         <button class="btn btn-danger" type="submit">delete accoutn</button>
                     </form>
-
-
                     <p class=" mx-2 card-text"><small class="text-body-secondary">
                         <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -121,9 +116,6 @@
                         </small>
                     </p>
                     </div>
-
-
-
                 </div>
             </div>
         </div>

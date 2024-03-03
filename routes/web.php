@@ -87,8 +87,8 @@ Route::post('/UpdatePassword', [MailController::class, 'UpdatePassword'])->name(
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/CheckOrders', [OrderController::class, 'index'])->name('Orders');
-    Route::get('/stock', [AdminController::class, 'stock'])->name('stock');
+    Route::get('/stock', [AdminController::class, 'stock'])->name('Orders');
+    // Route::get('/stock', )->name('stock');
 
     // CRUD Product
 

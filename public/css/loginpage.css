@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap");
 
 * {
-    font-family: 'EB Garamond', serif;
+    font-family: "EB Garamond", serif;
 }
 
 .menu-bar {
@@ -51,5 +51,40 @@
     font-size: 33px;
 }
 .form-control {
-background-color: #f2f2f2;
+    background-color: #f2f2f2;
+}
+.card-forgot {
+    border: solid black 1.5px;
+    border-radius: 20px;
+    margin-block: 6%;
+    margin-inline: 25%;
+    padding-block: 20px;
+    padding-inline: 40px;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
+}
+.title-forgot {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+.btn-forgot-group {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 20px;
+}
+.btn-sand{
+    border-radius: 10px;
+    padding-inline: 30px;
+    padding-block: 5px;
+    background-color: #000;
+    color: white;
+}
+.btn-sand:hover{
+    border-radius: 10px;
+    padding-inline: 30px;
+    padding-block: 5px;
+    background-color: #4b4a4a;
+    color: white;
+    font-weight: bold;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
 }

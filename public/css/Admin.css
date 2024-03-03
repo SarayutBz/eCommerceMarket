@@ -73,3 +73,56 @@
     margin-inline: 30px;
     height: 500px;
 }
+.main-addpage{
+    margin-block: 10px;
+    margin-inline: 15%;
+    padding-inline: 30px;
+    padding-block: 15px;
+    border: solid 2px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
+}
+.btn-add-group{
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 20px;
+}
+.btn-add-product{
+    color: white;
+    font-weight: 500;
+    background-color: #000000;
+    border: solid white 2px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.btn-add-product:hover{
+    color: white;
+    font-weight: 500;
+    background-color: #0078bc;
+    border: solid black 2px;
+    border-radius: 10px;
+    padding: 10px;
+    
+}
+.btn-cancle{
+    color: white;
+    font-weight: 500;
+    background-color: #ff0000;
+    border: solid white 2px;
+    border-radius: 10px;
+    padding-block: 10px;
+    padding-inline: 20px;
+    font-size: medium;
+
+}
+.btn-cancle:hover{
+    color: white;
+    font-weight: 500;
+    background-color: #d30000;
+    border: solid rgb(0, 0, 0) 2px;
+    border-radius: 10px;
+    padding-block: 10px;
+    padding-inline: 20px;
+    font-size: medium;
+
+}

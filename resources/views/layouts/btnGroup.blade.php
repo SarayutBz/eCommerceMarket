@@ -6,6 +6,11 @@
         </div>
     </a>
 
+    <a href="{{ route('Orders') }}" class="btn_check2">
+        <h1>Check</h1>
+        <h4>saless</h4>
+    </a>
+
 
 </div>
 

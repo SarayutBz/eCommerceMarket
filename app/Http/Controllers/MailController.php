@@ -40,8 +40,15 @@ class MailController extends Controller
                 // Send email
                 // สร้างข้อมูลที่ใช้ในการสร้างอีเมล (subject และ body).
                 $data = [
-                    'subject' => 'ball',
-                    'body' => '  ' . $randomNumber,
+                    'subject' => 'ยืนยันรหัสผ่านใหม่สำหรับบัญชีของคุณ',
+                    'body1' => "สวัสดีคุณ $email,\n\n",
+                    'body2' =>  "เราได้รับคำขอการกู้คืนรหัสผ่านสำหรับบัญชีของคุณที่เชื่อมโยงกับที่อยู่อีเมลนี้.\n",
+                    'body3' => "รหัสยืนยันของคุณคือ: $randomNumber\n\n",
+                    'body4' => "กรุณาใส่รหัสนี้ในหน้ากู้คืนรหัสผ่านของเราเพื่อกำหนดรหัสผ่านใหม่. ",
+                    'body5' => "รหัสนี้จะมีอายุการใช้งานเพียงไม่กี่นาทีเท่านั้น, ดังนั้นกรุณาใช้รหัสนี้โดยเร็ว.\n\n",
+                    'body6' => "หากคุณไม่ได้ทำการขอกู้คืนรหัสผ่านหรือมีคำถามใด ๆ, กรุณาติดต่อทีมสนับสนุนของเราที่ [ ไม่บอกเขิน ].\n\n",
+                    'body7' => "ขอบคุณ,\n\n",
+                    'body8' => "ทีม [ คนจริง โอวัลตินต้องละลาย ]",
                 ];
                 // สร้าง instance ของ MailNotify ซึ่งคือ Mailable class ที่มีหน้าที่จัดรูปแบบของอีเมล.
                 $codesend = new MailNotify($data);
@@ -86,14 +93,13 @@ class MailController extends Controller
         // หา ข้อมูลใน database table code ที่มี email ตรงกับ ที่รับมา ให้ นำค่า code ออกมาเก็บใน $code
         $code = code::where('email', $request->email)->first()->code;
         //ถ้า หาก $code มีค่า ตรง กับ ค่าที่รับมา
-        if($code == $request->code){
-        // return response()->json('good');
-        // ให้ ไปหน้า auth/resetpassword.blade.php
-        return redirect()->route('resetpage');
+        if ($code == $request->code) {
+            // return response()->json('good');
+            // ให้ ไปหน้า auth/resetpassword.blade.php
+            return redirect()->route('resetpage');
 
-        }
-        else{
-        // ให้ ไปหน้า auth/forgotpassword.blade.php
+        } else {
+            // ให้ ไปหน้า auth/forgotpassword.blade.php
             return redirect()->route('forgotpassword');
         }
         // dd($code);

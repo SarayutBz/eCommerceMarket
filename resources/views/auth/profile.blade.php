@@ -31,7 +31,8 @@
                 @if ($images->isNotEmpty())
                     @foreach ($images as $image)
                         <a href="{{ route('profile') }}">
-                            <img src="{{ asset('storage/images/' . $image->filename) }}" alt="">
+                            <img src="{{ asset('storage/images/' . $image->filename) }}" alt="Image">
+                           
                         </a>
                     @endforeach
                 @else

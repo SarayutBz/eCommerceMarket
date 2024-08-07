@@ -1,4 +1,4 @@
-<p align="center">
+
   <a href="https://laravel.com" target="_blank">
     <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
   </a>
@@ -33,6 +33,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - **User Login**: Registered users can log in to access their account.
 - **Product Listing**: Users can browse products available in the store.
 - **User Profile**: Users can view and edit their profile information.
+
+###  UX/UI Design Figma
+
+<img src="https://github.com/user-attachments/assets/dbd60270-c19f-49b7-a4a3-e413e1df2efd" width="400">
+
+[View Here](https://www.figma.com/design/QcEAVFZKyzPQuBxqH0QnHI/Project-Final-mr.Joe?node-id=0-1&t=nwZFtStpvxZA1ifh-1) </br>
+
+<img src="https://github.com/user-attachments/assets/acce450b-f56a-4e81-92f0-110006c0dd58" width="400">
+
+[View Here Admin Design](https://www.figma.com/design/qN85qVhQLFSFOh3k1o5ZRw/Admin?node-id=0-1&t=ykh04O3sHQ7B0RgU-1)
+    
 
 
 ## Installation
@@ -138,6 +149,20 @@ To install and set up the project, follow these steps:
     ```
 
 Now you should be able to access the application in your web browser at `http://localhost:8000`.
+
+### :house: HomePage
+
+<img src="https://github.com/user-attachments/assets/2bedd168-ed02-44f2-b9cb-a4bd744292da" width="500">
+<img src="https://github.com/user-attachments/assets/c1fb1c8e-b986-4047-9379-43f079093905" width="500">
+
+### :adult: Profile
+
+<img src="https://github.com/user-attachments/assets/72b9dd06-5a68-4f77-9862-e419b9657281" width="500">
+
+### :shopping_cart: Cart
+
+<img src="https://github.com/user-attachments/assets/df9446c5-2a70-4e62-9f73-b638f890658e" width="500">
+
 
 ### Project Creators
 

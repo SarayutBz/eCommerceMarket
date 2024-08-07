@@ -34,6 +34,11 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - **Product Listing**: Users can browse products available in the store.
 - **User Profile**: Users can view and edit their profile information.
 
+### Paper
+[เนื้อหาE-CommerceMarket.pdf](https://github.com/user-attachments/files/16522876/E-CommerceMarket.pdf)
+
+
+
 ###  UX/UI Design Figma
 
 <img src="https://github.com/user-attachments/assets/dbd60270-c19f-49b7-a4a3-e413e1df2efd" width="400">

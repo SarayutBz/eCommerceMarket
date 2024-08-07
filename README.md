@@ -171,9 +171,10 @@ Now you should be able to access the application in your web browser at `http://
 
 ### Project Creators
 
-- **:avocado: [Sarayut Aiamaurai](https://github.com/SarayutBz)** - Project Lead and Developer
-- **:frog: [Wongsaphat Nagmaung ](https://github.com/Bee34949)** - Backend Developer
-- **:takeout_box: [Wattanapongphan Promnoi ](https://github.com/Wattanapongphan)** - Backend Developer
-- **:beers: [Atithap Paksangkane ](https://github.com/Eshull2p1)** - UI/UX Designer and Frontend
+- **:avocado: [Sarayut Aiamaurai](https://github.com/SarayutBz)** - Project Lead and Developer :shipit:
+- **:frog: [Wongsaphat Nagmaung ](https://github.com/Bee34949)** - Backend Developer :computer: 
+- **:takeout_box: [Wattanapongphan Promnoi ](https://github.com/Wattanapongphan)** - Backend Developer :computer:
+- **:beers: [Atithap Paksangkane ](https://github.com/Eshull2p1)** - UI/UX Designer and Frontend :basecamp:
+- **:rose: [Aranya Sangpakan](https://github.com/Aranya77)** - Documentation Manager :pencil:
 
 

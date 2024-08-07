@@ -51,6 +51,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 [View Here Admin Design](https://www.figma.com/design/qN85qVhQLFSFOh3k1o5ZRw/Admin?node-id=0-1&t=ykh04O3sHQ7B0RgU-1)
     
+### Database ER Diagram
+![image](https://github.com/user-attachments/assets/b18475e8-916b-4730-9f90-09086a0bad46)
 
 
 ## Installation

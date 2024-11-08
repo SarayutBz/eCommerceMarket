@@ -1,0 +1,99 @@
+.body {
+    height: 1200px;
+}
+.Header_bar {
+    background-color: #0078bc;
+    color: white;
+    padding-block: 10px;
+    padding-inline: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+.footer {
+    background-color: black;
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    left: 0;
+    bottom: 0;
+}
+
+.Main_body {
+    border-radius: 10px;
+}
+
+.btnGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 80px;
+    margin-inline: 100px;
+    margin-top: 50px;
+}
+
+.btn_check1 {
+    color: white;
+    background-color: #eb8484;
+    padding-inline: 40px;
+    padding-block: 20px;
+    text-decoration: none;
+}
+.btn_check2 {
+    color: white;
+    background-color: #648bd6;
+    padding-inline: 40px;
+    padding-block: 20px;
+    text-decoration: none;
+}
+.btn_check3 {
+    color: white;
+    background-color: #4aa24d;
+    padding-inline: 40px;
+    padding-block: 20px;
+    text-decoration: none;
+}
+.title_text {
+    text-decoration: underline;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 600;
+    margin-block: 40px;
+}
+
+.tool_bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 5px;
+    margin-inline: 80px;
+    margin-block: 10px;
+}
+.tool_btn {
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 0px;
+    border: solid 0.5px;
+    text-decoration: none;
+    color: black;
+}
+.tool_btn:hover {
+    background-color: #ebebeb;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 0px;
+    border: solid 0.5px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+.table-data {
+    margin-inline: 30px;
+    height: 650px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.col-table {
+    width: 200px;
+    overflow-x: auto;
+}

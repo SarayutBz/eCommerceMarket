@@ -46,7 +46,7 @@
         </div>
     </form>
 
-    <a href="">
+    <a href="{{route('forgotpassword')}}">
         <h6 class="mt-3">Forgot password ? </h6>
     </a>
 
